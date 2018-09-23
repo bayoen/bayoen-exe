@@ -1,0 +1,83 @@
+﻿<mtc:MetroWindow x:Class="bayoen.MainWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mtc="http://metro.mahapps.com/winfx/xaml/controls"
+                 
+                 Title="Bayoen"
+                 BorderThickness="0"
+                 BorderBrush="Crimson"
+                 TitleCaps="False"
+                 
+                 MinHeight="480"
+                 MinWidth="640"
+                 Height="500"
+                 Width="650">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{Binding Height, ElementName=ControlPanel}"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="{Binding Height, ElementName=StatusBorder}"/>
+        </Grid.RowDefinitions>
+
+
+        <Grid Grid.Row="0" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch">
+            <StackPanel x:Name="ControlPanel" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                <!--<Button x:Name="StartButton" Width="70" Height="30" Margin="2,4,2,4" Style="{DynamicResource AccentedSquareButtonStyle}" Click="StartButton_Click">
+                    <StackPanel Orientation="Horizontal" Margin="3,0,3,0">
+                        <Rectangle Width="12" Height="12" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_control_play}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="Start"  Margin="4,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>-->                
+            </StackPanel>
+        </Grid>
+
+        <!--Row 1-->
+        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+            <ListBox x:Name="OutListBox" MinHeight="250" MinWidth="400" ScrollViewer.VerticalScrollBarVisibility="Visible">
+
+            </ListBox>
+
+            <TextBlock x:Name="TextOut"/>
+        </StackPanel>
+
+        <!--Row 2-->
+        <Border x:Name="StatusBorder" Grid.Row="2">
+            <Grid>
+                <mtc:MetroProgressBar x:Name="StatusBar" Height="28" VerticalAlignment="Center" Foreground="{DynamicResource AccentColorBrush}" />
+                <TextBlock x:Name="StatusTextBlock" Foreground="White" VerticalAlignment="Center" Padding="8,0,8,0" FontSize="14"/>
+                <TextBlock x:Name="VersionTextBlock" Text="Bayoen - Puyo Puyo Tetris Stats v0.1" Foreground="Gray" VerticalAlignment="Center" Padding="8,0,8,0" FontSize="9" FontWeight="Bold" HorizontalAlignment="Right"/>
+            </Grid>
+        </Border>
+    </Grid>
+
+    <!--Titlebar buttons-->
+    <mtc:MetroWindow.RightWindowCommands>
+        <mtc:WindowCommands>
+            <Button x:Name ="StatOnButton" Visibility="Collapsed" Click="StatOnButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="13" Height="15" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_control_play}"/>
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Width="25" Margin="4,0,0,0" TextAlignment="Center" VerticalAlignment="Center" Text="ON" FontSize="12"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name ="StatOffButton" Visibility="Collapsed" Click="StatOffButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="13" Height="15" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_control_pause}"/>
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Width="25" Margin="4,0,0,0" TextAlignment="Center" VerticalAlignment="Center" Text="OFF" FontSize="12"/>
+                </StackPanel>
+            </Button>
+        </mtc:WindowCommands>
+    </mtc:MetroWindow.RightWindowCommands>
+</mtc:MetroWindow>
