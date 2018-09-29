@@ -23,3 +23,8 @@ D:\Work\WPF Works\bayoen-exe\bayoen\obj\x64\Debug\bayoen.csproj.CoreCompileInput
 D:\Work\WPF Works\bayoen-exe\bayoen\obj\x64\Debug\bayoen.csproj.CopyComplete
 D:\Work\WPF Works\bayoen-exe\bayoen\obj\x64\Debug\bayoen.exe
 D:\Work\WPF Works\bayoen-exe\bayoen\obj\x64\Debug\bayoen.pdb
+D:\Work\WPF Works\bayoen-exe\bayoen\bin\x64\Debug\ControlzEx.dll
+D:\Work\WPF Works\bayoen-exe\bayoen\bin\x64\Debug\ControlzEx.pdb
+D:\Work\WPF Works\bayoen-exe\bayoen\obj\x64\Debug\MatchItem.g.cs
+D:\Work\WPF Works\bayoen-exe\bayoen\obj\x64\Debug\bayoen_MarkupCompile.lref
+D:\Work\WPF Works\bayoen-exe\bayoen\obj\x64\Debug\MatchItem.baml

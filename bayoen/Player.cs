@@ -28,7 +28,7 @@ namespace bayoen
             public PlayTypes? PlayType;   // Puyopuyo? tetris?
             public int? Position;        // in game position
             //public Avatars? Avatar;      // in game avatar
-            public List<bool> Stars;      // Star
+            public List<MatchResults> Stars;      // Star
             //public List<int> Scores;      // Score
             //public int? Delta;           // Increasement of rating
 
@@ -53,7 +53,7 @@ namespace bayoen
                 //this.Position = null;
 
 
-                if (this.Stars == null) this.Stars = new List<bool>();
+                if (this.Stars == null) this.Stars = new List<MatchResults>();
                 else this.Stars.Clear();
 
                 //if (this.Scores == null) this.Scores = new List<int>();

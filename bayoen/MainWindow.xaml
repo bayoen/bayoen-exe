@@ -3,15 +3,37 @@
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:mtc="http://metro.mahapps.com/winfx/xaml/controls"
                  
-                 Title="Bayoen"
-                 BorderThickness="0"
-                 BorderBrush="Crimson"
-                 TitleCaps="False"
+                 Title="bayoen~" TitleCaps="False"
+                 BorderThickness="1" BorderBrush="Transparent"
+                 Height="500" MinHeight="480"
+                 Width="650" MinWidth="250"
                  
-                 MinHeight="480"
-                 MinWidth="640"
-                 Height="500"
-                 Width="650">
+                 Closing="MetroWindow_Closing">
+
+    <mtc:MetroWindow.Resources>
+        <!--SectionTitle TextBlock-->
+        <Style x:Key="SectionTitle" BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
+        <Style x:Key="GradientGridSplitter" BasedOn="{StaticResource {x:Type GridSplitter}}" TargetType="GridSplitter">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush Opacity="0.6">
+                        <GradientStop Offset="0.000" Color="Transparent"/>
+                        <GradientStop Offset="0.050" Color="White"/>
+                        <GradientStop Offset="0.925" Color="White"/>
+                        <GradientStop Offset="0.975" Color="Transparent"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </mtc:MetroWindow.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="{Binding Height, ElementName=ControlPanel}"/>
@@ -22,33 +44,175 @@
 
         <Grid Grid.Row="0" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch">
             <StackPanel x:Name="ControlPanel" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-
-                <!--<Button x:Name="StartButton" Width="70" Height="30" Margin="2,4,2,4" Style="{DynamicResource AccentedSquareButtonStyle}" Click="StartButton_Click">
+                <Button x:Name="ClearButton" Height="{Binding Height, ElementName=CountingStarOnButton}" Margin="2,4,2,4" Style="{DynamicResource AccentedSquareButtonStyle}" Click="ClearButton_Click">
                     <StackPanel Orientation="Horizontal" Margin="3,0,3,0">
-                        <Rectangle Width="12" Height="12" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                        <Rectangle Width="17" Height="17" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
                             <Rectangle.OpacityMask>
-                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_control_play}" />
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_clear}" />
                             </Rectangle.OpacityMask>
                         </Rectangle>
-                        <TextBlock Text="Start"  Margin="4,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Clear"  Margin="4,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
-                </Button>-->                
+                </Button>
+                
+                <Button x:Name="CountingStarOnButton" Width="100" Height="30" Margin="2,4,2,4" Visibility="Collapsed" Style="{DynamicResource AccentedSquareButtonStyle}" Click="CountingStarOnButton_Click">
+                    <StackPanel Orientation="Horizontal" Margin="3,0,3,0">
+                        <Rectangle Width="17" Height="17" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_star_add}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="Open"  Margin="4,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="CountingStarOffButton" Width="{Binding Width, ElementName=CountingStarOnButton}" Height="{Binding Height, ElementName=CountingStarOnButton}" Margin="2,4,2,4" Visibility="Collapsed" Style="{DynamicResource AccentedSquareButtonStyle}" Click="CountingStarOffButton_Click">
+                    <StackPanel Orientation="Horizontal" Margin="3,0,3,0">
+                        <Rectangle Width="17" Height="17" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_star_delete}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="Closed"  Margin="4,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="PopupButton" Height="{Binding Height, ElementName=CountingStarOnButton}" Margin="2,4,2,4" Style="{DynamicResource AccentedSquareButtonStyle}" Click="PopupButton_Click">
+                    <StackPanel Orientation="Horizontal" Margin="3,0,3,0">
+                        <Rectangle Width="17" Height="17" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_new}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="Popup"  Margin="4,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
             </StackPanel>
         </Grid>
 
         <!--Row 1-->
-        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+        <Grid x:Name="TopGrid" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="Row0" Height="{Binding Height, ElementName=CurrentMatchGrid}"/>
+                <RowDefinition x:Name="Row1" Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="Col0" MinWidth="250"/>
+                <ColumnDefinition x:Name="CDS0" Width="{Binding Width, ElementName=CS0}"/>
+                <ColumnDefinition x:Name="Col1" Width="410"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid x:Name="CurrentMatchGrid" Grid.Column="0" Grid.Row="0" Height="100">
+                <TextBlock Style="{StaticResource SectionTitle}" x:Name="CurrentMatchText" Text="Current Match" />
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel.Resources>
+                        <!--Star Numbering TextBlock-->
+                        <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                            <Setter Property="FontSize" Value="30"/>
+                            <Setter Property="FontWeight" Value="ExtraBold"/>
+                            <Setter Property="MaxWidth" Value="88"/>
+                            <Setter Property="Margin" Value="3"/>
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <TextBlock x:Name="CurrentStar1" Text="0"/>
+                    <TextBlock Text=":"/>
+                    <TextBlock x:Name="CurrentStar2" Text="0"/>
+                    <TextBlock Text=":"/>
+                    <TextBlock x:Name="CurrentStar3" Text="0"/>
+                    <TextBlock Text=":"/>
+                    <TextBlock x:Name="CurrentStar4" Text="0"/>
+                </StackPanel>
+                
+            </Grid>
+
+            
+            <!--<TextBlock x:Name="EventListText" Grid.Column="0" Grid.Row="1" Style="{StaticResource SectionTitle}" Text="Event List"/>-->
+
+            <ScrollViewer Grid.Column="0" Grid.Row="1">
+                <WrapPanel x:Name="MatchItemPanel" Orientation="Vertical">
+
+                </WrapPanel>
+            </ScrollViewer>
+
+            <TextBlock x:Name="TextOut" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
+
+            <GridSplitter x:Name="CS0" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="3" Style="{StaticResource GradientGridSplitter}" IsEnabled="False" Focusable="False"/>
+
+            <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2">
+                <!--<CheckBox Content="Export '*.txt'"/>-->
+                <!--<CheckBox Content="Export capturable window"/>-->
+
+                <!--<RadioButton Content="2P"/>-->
+                <!--<RadioButton Content="4P"/>-->
+
+                <Grid x:Name="CountingStarGrid" Height="100">
+                    <TextBlock Style="{StaticResource SectionTitle}" x:Name="CountingStarText" Text="Counting Star" />
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <StackPanel.Resources>
+                            <!--Star Numbering TextBlock-->
+                            <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                                <Setter Property="FontSize" Value="30"/>
+                                <Setter Property="FontWeight" Value="ExtraBold"/>
+                                <Setter Property="MaxWidth" Value="88"/>
+                                <Setter Property="Margin" Value="3"/>
+                            </Style>
+                        </StackPanel.Resources>
+
+                        <TextBlock x:Name="CountingStar1" Text="0"/>
+                        <TextBlock Text=":"/>
+                        <TextBlock x:Name="CountingStar2" Text="0"/>
+                        <TextBlock Text=":"/>
+                        <TextBlock x:Name="CountingStar3" Text="0"/>
+                        <TextBlock Text=":"/>
+                        <TextBlock x:Name="CountingStar4" Text="0"/>
+                    </StackPanel>
+
+                </Grid>
+                <Grid x:Name="CountingGameGrid" Height="100">
+                    <TextBlock Style="{StaticResource SectionTitle}" x:Name="CountingGameText" Text="Counting Game" />
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <StackPanel.Resources>
+                            <!--Star Numbering TextBlock-->
+                            <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                                <Setter Property="FontSize" Value="30"/>
+                                <Setter Property="FontWeight" Value="ExtraBold"/>
+                                <Setter Property="MaxWidth" Value="88"/>
+                                <Setter Property="Margin" Value="3"/>
+                            </Style>
+                        </StackPanel.Resources>
+
+                        <TextBlock x:Name="CountingGame1" Text="0"/>
+                        <TextBlock Text=":"/>
+                        <TextBlock x:Name="CountingGame2" Text="0"/>
+                        <TextBlock Text=":"/>
+                        <TextBlock x:Name="CountingGame3" Text="0"/>
+                        <TextBlock Text=":"/>
+                        <TextBlock x:Name="CountingGame4" Text="0"/>
+                    </StackPanel>
+
+                </Grid>
+            </StackPanel>
+            
+
+            <!--<TextBlock x:Name="TextOut" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Style="{StaticResource SectionTitle}" Text="Event List"/>-->
+            <!--<TextBlock x:Name="CountingStarText" Grid.Column="2" Style="{StaticResource SectionTitle}" Background="Transparent" Text="Counting Stars"/>-->
+
+        </Grid>
+        
+        <StackPanel Grid.Row="1" Orientation="Vertical" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Stretch">
             <ListBox x:Name="OutListBox" MinHeight="250" MinWidth="400" ScrollViewer.VerticalScrollBarVisibility="Visible">
 
             </ListBox>
 
-            <TextBlock x:Name="TextOut"/>
+            
         </StackPanel>
 
         <!--Row 2-->
         <Border x:Name="StatusBorder" Grid.Row="2">
             <Grid>
-                <mtc:MetroProgressBar x:Name="StatusBar" Height="28" VerticalAlignment="Center" Foreground="{DynamicResource AccentColorBrush}" />
+                <mtc:MetroProgressBar x:Name="StatusBar" Height="25" VerticalAlignment="Center" Foreground="{DynamicResource HighlightBrush}"/>
                 <TextBlock x:Name="StatusTextBlock" Foreground="White" VerticalAlignment="Center" Padding="8,0,8,0" FontSize="14"/>
                 <TextBlock x:Name="VersionTextBlock" Text="Bayoen - Puyo Puyo Tetris Stats v0.1" Foreground="Gray" VerticalAlignment="Center" Padding="8,0,8,0" FontSize="9" FontWeight="Bold" HorizontalAlignment="Right"/>
             </Grid>
@@ -58,24 +222,24 @@
     <!--Titlebar buttons-->
     <mtc:MetroWindow.RightWindowCommands>
         <mtc:WindowCommands>
-            <Button x:Name ="StatOnButton" Visibility="Collapsed" Click="StatOnButton_Click">
+            <Button x:Name ="StatOnButton" Background="Transparent" Visibility="Collapsed" Click="StatOnButton_Click">
                 <StackPanel Orientation="Horizontal">
-                    <Rectangle Width="13" Height="15" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                    <Rectangle Width="10" Height="15" Margin="7,3,5,3" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
                         <Rectangle.OpacityMask>
                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_control_play}"/>
                         </Rectangle.OpacityMask>
                     </Rectangle>
-                    <TextBlock Width="25" Margin="4,0,0,0" TextAlignment="Center" VerticalAlignment="Center" Text="ON" FontSize="12"/>
+                    <TextBlock Width="25" Margin="2,3,2,3" TextAlignment="Left" VerticalAlignment="Center" Text="ON" FontSize="12"/>
                 </StackPanel>
             </Button>
-            <Button x:Name ="StatOffButton" Visibility="Collapsed" Click="StatOffButton_Click">
+            <Button x:Name ="StatOffButton" Background="Transparent" Visibility="Collapsed" Click="StatOffButton_Click">
                 <StackPanel Orientation="Horizontal">
-                    <Rectangle Width="13" Height="15" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                    <Rectangle Width="10" Height="15" Margin="7,3,5,3" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
                         <Rectangle.OpacityMask>
                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_control_pause}"/>
                         </Rectangle.OpacityMask>
                     </Rectangle>
-                    <TextBlock Width="25" Margin="4,0,0,0" TextAlignment="Center" VerticalAlignment="Center" Text="OFF" FontSize="12"/>
+                    <TextBlock Width="25" Margin="2,3,2,3" TextAlignment="Left" VerticalAlignment="Center" Text="OFF" FontSize="12"/>
                 </StackPanel>
             </Button>
         </mtc:WindowCommands>
