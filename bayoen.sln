@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bayoen", "bayoen\bayoen.csproj", "{0F56EDA9-CF7F-4C49-A67B-3FCD434D4902}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bayoen", "bayoen-exe\bayoen.csproj", "{0F56EDA9-CF7F-4C49-A67B-3FCD434D4902}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +26,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {DD24DE89-3952-4BCA-8422-EE7BE2E45A7D}
+		SolutionGuid = {0F976424-42DB-40DA-99D3-577E3A896903}
 	EndGlobalSection
 EndGlobal
