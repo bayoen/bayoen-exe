@@ -1,5 +1,5 @@
-![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)
-[![Github All Releases](https://img.shields.io/github/downloads/bayoen/bayoen-exe/total.svg?style=flat-square)]()
+[![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/bayoen/bayoen-exe/blob/master/LICENSE)
+[![Github All Releases](https://img.shields.io/github/downloads/bayoen/bayoen-exe/total.svg?style=flat-square)](https://github.com/bayoen/bayoen-exe/releases/latest)
 
 Please DO NOT Download yet. We are not ready yet. Please go **bayoen-star** and get patient. We are about to get ready!
 
