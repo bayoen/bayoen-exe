@@ -118,31 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="CrownLight" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CrownLight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PanelScore2LongStrong" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\score2_long_strong.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PanelScore2ShortStrong" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\score2_short_strong.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="StarPlain" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\StarPlain.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PanelScore2FitStrong" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\score2_fit_strong.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SubPanelGoalString" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\goal_strong.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="dailycarbuncle_174030608386_kirbuncle" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dailycarbuncle_174030608386_kirbuncle.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="dailycarbuncle_174765162266_gummy_carbuncles" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dailycarbuncle_174765162266_gummy-carbuncles.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="StarPlus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\StarPlus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ico_kirby_star_allies" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\dailycarbuncle_176412854606_edited_kirby_star_allies.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

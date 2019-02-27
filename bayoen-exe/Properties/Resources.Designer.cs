@@ -61,92 +61,12 @@ namespace bayoen.Properties {
         }
         
         /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap CrownLight {
-            get {
-                object obj = ResourceManager.GetObject("CrownLight", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   (아이콘)과(와) 유사한 System.Drawing.Icon 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Icon dailycarbuncle_174030608386_kirbuncle {
+        internal static System.Drawing.Icon ico_kirby_star_allies {
             get {
-                object obj = ResourceManager.GetObject("dailycarbuncle_174030608386_kirbuncle", resourceCulture);
+                object obj = ResourceManager.GetObject("ico_kirby_star_allies", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   (아이콘)과(와) 유사한 System.Drawing.Icon 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Icon dailycarbuncle_174765162266_gummy_carbuncles {
-            get {
-                object obj = ResourceManager.GetObject("dailycarbuncle_174765162266_gummy_carbuncles", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap PanelScore2FitStrong {
-            get {
-                object obj = ResourceManager.GetObject("PanelScore2FitStrong", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap PanelScore2LongStrong {
-            get {
-                object obj = ResourceManager.GetObject("PanelScore2LongStrong", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap PanelScore2ShortStrong {
-            get {
-                object obj = ResourceManager.GetObject("PanelScore2ShortStrong", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap StarPlain {
-            get {
-                object obj = ResourceManager.GetObject("StarPlain", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap StarPlus {
-            get {
-                object obj = ResourceManager.GetObject("StarPlus", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap SubPanelGoalString {
-            get {
-                object obj = ResourceManager.GetObject("SubPanelGoalString", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }
