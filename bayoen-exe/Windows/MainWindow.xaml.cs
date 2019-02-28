@@ -27,5 +27,11 @@ namespace bayoen.Windows
         {
             this.InitializeComponent();
         }
+
+        private void Dashboard_Closing(object sender, CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
     }       
 }

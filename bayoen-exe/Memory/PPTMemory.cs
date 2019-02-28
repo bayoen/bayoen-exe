@@ -1,4 +1,5 @@
-﻿using System;
+﻿using bayoen.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,17 +37,24 @@ namespace bayoen.Memory
         public string PlayerNameForced(int index) => this.ReadValidString(this.PlayerAddress + index * 0x50, Config.PlayerNameSize);
         public string PlayerNameDirect(int index) => this.ReadValidString(new IntPtr(0x140598BD4 + index * 0x68), Config.PlayerNameSize);
 
+        //public PPTPlayTypes PlayType
+
         public int PlayerRating(int index) => this.ReadInt32(this._playerAddress + index * 0x50 + 0x30);
         public int PlayerRatingForced(int index) => this.ReadInt32(this.PlayerAddress + index * 0x50 + 0x30);
 
-        //public int PlayerScore(int index) =>     this.ReadInt32(new IntPtr(0x140473760), 0x20, index* 0x50 + 0x118);
-        //public int PlayerScoreForced(int index) => this.ReadInt32(new IntPtr(0x140473760), 0x20, index * 0x50 + 0x118);
+        public bool PlayType(int index) => this.ReadBinary(6, new IntPtr(0x140598C27 + index * 0x68));
 
-        public int Player1Score => this.ReadInt32(new IntPtr(0x140461B28), 0x380, 0x18, 0xE0, 0x3C);
-        public int Player2Score => this.ReadInt32(new IntPtr(0x140460690), 0x2D0, 0x0, 0x38, 0x78, 0xE0, 0x3C);
-        public int Player3Score => -1;
-        public int Player4Score => -1;
-        public List<int> PlayerScores => new List<int>() { Player1Score, Player2Score, Player3Score, Player4Score };
+        public int PlayerScore(int index)
+        {
+            switch (index)
+            {
+                case 0: return this.ReadInt32(new IntPtr(0x140461B28), 0x380, 0x18, 0xE0, 0x3C);
+                case 1: return this.ReadInt32(new IntPtr(0x140460690), 0x2D0, 0x0, 0x38, 0x78, 0xE0, 0x3C);
+                case 2:
+                case 3: return -1;
+                default: return -1;
+            }
+        }
 
         public int PlayerStar(int index)   => this.ReadInt32(new IntPtr(0x14057F048), index * 0x04 + 0x38);
 

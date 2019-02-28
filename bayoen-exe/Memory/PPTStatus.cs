@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using bayoen.Data;
+
 namespace bayoen.Memory
 {
     public class PPTStatus : ICloneable
@@ -232,76 +234,5 @@ namespace bayoen.Memory
         {
             return (4 < id) && (id < 10);
         }
-    }
-
-    public enum PPTMainStates : int
-    {
-        Invalid,
-        None,
-        Offline,
-        Title,        
-
-        MainMenu,
-        Adventure,
-        SoloArcade,
-        MultiArcade,
-        Option,
-        Online,
-        Lessons,
-
-        Loading,
-        CharacterSetection,
-
-        PuzzleLeague,
-        FreePlay,
-
-        OnlineReplay,
-        LocalReplay,
-    }
-
-    public enum PPTSubStates : int
-    {
-        Empty,
-        ModeSelect,
-        Stats,
-        Options,
-        Theatre,
-        Shop,
-        ChallengeModeSelection,
-        CharacterSelection,
-        Standby,
-        RoomSelection,
-        RoomCreation,
-        Matchmaking,
-        InLobby,
-        InReady,
-        InMatch,
-        Replays,
-        ReplayUpload,
-        Rankings,
-    }
-
-    public enum PPTGameModes : int
-    {
-        None,
-        Versus,
-        Fusion,
-        Swap,
-        Party,
-        BigBang,
-        EndlessFever,
-        TinyPuyo,
-        EndlessPuyo,
-        Sprint,
-        Marathon,
-        Ultra,
-    }
-
-    public enum PPTGameCategories : int
-    {
-        SoloArcade,
-        MultiArcade,
-        PuzzleLeague,
-        FreePlay,
     }
 }

@@ -8,7 +8,7 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("bayoen")]
-[assembly: AssemblyDescription("Counting Star Tool in Puyo Puyo Tetris")]
+[assembly: AssemblyDescription("Stats Tool in Puyo Puyo Tetris")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("team-bayoen")]
 [assembly: AssemblyProduct("bayoen-exe")]

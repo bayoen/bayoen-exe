@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Threading;
 
 using bayoen;
+using bayoen.Data;
 
 namespace bayoen.Memory
 {
@@ -22,27 +23,29 @@ namespace bayoen.Memory
             if (!Core.PPTStatus.Check()) return;
 
             this.PuzzleLeagueTick();
-            
+
+            Core.MainWindow.TextOut.Text = Core.CurrentMatch.ToJSON().ToString();
+
 
             Core.OldPPTStatus = Core.PPTStatus.Clone() as PPTStatus;
             
-            #region [text dashboard]
-            if (false) // Core.PPTMemory.CheckProcess()
-            {
-               // Do scan PPT
-                Core.MainWindow.TextOut.Text = $"{Core.PPTStatus.MainState.ToString()}"
-                    + $"\n{(Core.PPTStatus.SubState == PPTSubStates.Empty ? "" : Core.PPTStatus.SubState.ToString())}"
-                    + $"\n{(Core.PPTStatus.GameMode == PPTGameModes.None ? "" : Core.PPTStatus.GameMode.ToString())}{(Core.PPTStatus.IsEndurance ? " (Endurance)" : "")}"
-                    + $"\n\nGameFrame: {Core.PPTMemory.GameFrame}"
-                    + $"\nSceneFrame: {Core.PPTMemory.SceneFrame}"
-                    + $"\nStar: {Core.PPTMemory.PlayerStar(0)}-{Core.PPTMemory.PlayerStar(1)}-{Core.PPTMemory.PlayerStar(2)}-{Core.PPTMemory.PlayerStar(3)}"
-                    + $"\nName: {Core.PPTMemory.PlayerNameForced(0)} - {Core.PPTMemory.PlayerNameForced(1)} - {Core.PPTMemory.PlayerNameForced(2)} - {Core.PPTMemory.PlayerNameForced(3)}"
-                    + $"\nScore: {string.Join(" - ", Core.PPTMemory.PlayerScores)}"
-                    + $"\nRating: {Core.PPTMemory.PlayerRatingForced(0)} - {Core.PPTMemory.PlayerRatingForced(1)} - {Core.PPTMemory.PlayerRatingForced(2)} - {Core.PPTMemory.PlayerRatingForced(3)}"
-                    + $"\nSteam: {Core.PPTMemory.PlayerSteamID32Forced(0)} - {Core.PPTMemory.PlayerSteamID32Forced(1)} - {Core.PPTMemory.PlayerSteamID32Forced(2)} - {Core.PPTMemory.PlayerSteamID32Forced(3)}";
+            //#region [text dashboard]
+            //if (false) // Core.PPTMemory.CheckProcess()
+            //{
+            //   // Do scan PPT
+            //    Core.MainWindow.TextOut.Text = $"{Core.PPTStatus.MainState.ToString()}"
+            //        + $"\n{(Core.PPTStatus.SubState == PPTSubStates.Empty ? "" : Core.PPTStatus.SubState.ToString())}"
+            //        + $"\n{(Core.PPTStatus.GameMode == PPTGameModes.None ? "" : Core.PPTStatus.GameMode.ToString())}{(Core.PPTStatus.IsEndurance ? " (Endurance)" : "")}"
+            //        + $"\n\nGameFrame: {Core.PPTMemory.GameFrame}"
+            //        + $"\nSceneFrame: {Core.PPTMemory.SceneFrame}"
+            //        + $"\nStar: {Core.PPTMemory.PlayerStar(0)}-{Core.PPTMemory.PlayerStar(1)}-{Core.PPTMemory.PlayerStar(2)}-{Core.PPTMemory.PlayerStar(3)}"
+            //        + $"\nName: {Core.PPTMemory.PlayerNameForced(0)} - {Core.PPTMemory.PlayerNameForced(1)} - {Core.PPTMemory.PlayerNameForced(2)} - {Core.PPTMemory.PlayerNameForced(3)}"
+            //        + $"\nScore: {string.Join(" - ", Core.PPTMemory.PlayerScores)}"
+            //        + $"\nRating: {Core.PPTMemory.PlayerRatingForced(0)} - {Core.PPTMemory.PlayerRatingForced(1)} - {Core.PPTMemory.PlayerRatingForced(2)} - {Core.PPTMemory.PlayerRatingForced(3)}"
+            //        + $"\nSteam: {Core.PPTMemory.PlayerSteamID32Forced(0)} - {Core.PPTMemory.PlayerSteamID32Forced(1)} - {Core.PPTMemory.PlayerSteamID32Forced(2)} - {Core.PPTMemory.PlayerSteamID32Forced(3)}";
 
-            }
-            #endregion
+            //}
+            //#endregion
         }
 
         private void PuzzleLeagueTick()
@@ -55,31 +58,32 @@ namespace bayoen.Memory
                     {
                         // New match
                         Core.CurrentMatch.Initialize();
-                        Core.MainWindow.TextOut.Text += "\n\n";
-                        Core.MainWindow.TextOut.Text += $"{DateTime.Now.ToString()}: {Core.PPTMemory.PlayerNameForced(0)} vs. {Core.PPTMemory.PlayerNameForced(1)}";
                     }
                     else if (Core.OldPPTStatus.SubState == PPTSubStates.InMatch)
                     {
-                        if ((Core.PPTStatus.GameFrame > 0 && Core.OldPPTStatus.GameFrame == 0)
-                            || (Core.PPTStatus.GameFrame < Core.OldPPTStatus.GameFrame))
+                        // In match
+                        if ((Core.PPTStatus.GameFrame > 0 && Core.OldPPTStatus.GameFrame == 0) // 0 -> 1 game
+                            || (Core.PPTStatus.GameFrame < Core.OldPPTStatus.GameFrame)) // n-1 -> n game
                         {
+                            #region [ Draw game and save it ]
+                            // Save draw game (post processing)
                             if (Core.CurrentGame.GameEnd != DateTime.MinValue && Core.CurrentGame.Winners.Count == 0)
                             {
                                 if (Core.PPTStatus.PlayerStars.SequenceEqual(Core.OldPPTStatus.PlayerStars))
                                 {
-                                    Core.MainWindow.TextOut.Text += " [Draw]";                                    
+                                    Core.MainWindow.TextOut.Text += " [Draw]";
                                     Core.CurrentMatch.SaveCurrentGame();
                                 }
-                            }                            
+                            }
+                            #endregion
 
                             // New game
                             Core.CurrentGame.Initialize();
-                            Core.MainWindow.TextOut.Text += $"\nGame {(Core.CurrentMatch.Games.Count + 1).ToString()}: {Core.CurrentGame.GameBegin.ToString("h:mm:ss")}";
                             return;
                         }
 
-                        //// In game
-                        // Do nothing yet
+                        // record ticks
+                        Core.CurrentGame.CheckTickScores();
 
                         if (Core.PPTStatus.PuzzleLeagueGameFinishFlag && !Core.OldPPTStatus.PuzzleLeagueGameFinishFlag)
                         {
@@ -87,13 +91,12 @@ namespace bayoen.Memory
                             {
                                 // Terminate game 1
                                 Core.CurrentGame.End();
-                                Core.MainWindow.TextOut.Text += $" - {Core.CurrentGame.GameEnd.ToString("h:mm:ss")}";
                             }
                         }
 
                         if (!Core.PPTStatus.PlayerStars.SequenceEqual(Core.OldPPTStatus.PlayerStars))
                         {
-                            // Terminate game 1
+                            // Terminate game 2
                             List<int> diff = Core.PPTStatus.PlayerStars.Zip(Core.OldPPTStatus.PlayerStars, (x, y) => x - y).ToList();
                             if (Core.PPTStatus.LobbyMax == 2)
                             {
@@ -106,9 +109,19 @@ namespace bayoen.Memory
                                 if (diff[playerIndex] == 1) Core.CurrentGame.Winners.Add(playerIndex + 1);
                             }
 
-                            Core.MainWindow.TextOut.Text += $" [{Core.CurrentGame.Winners.Single().ToString()}P Won]";
                             Core.CurrentMatch.SaveCurrentGame();
                         }
+
+                        if (Core.CurrentMatch.WinCount > 0)
+                        {
+                            if (Core.CurrentMatch.MatchEnd == DateTime.MinValue)
+                            {
+                                if (Core.CurrentMatch.MatchScores().IndexOf(Core.CurrentMatch.WinCount) > -1)
+                                {
+                                    Core.CurrentMatch.End();
+                                }
+                            }
+                        }                        
                     }
                 }
             }

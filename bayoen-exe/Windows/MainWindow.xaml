@@ -1,4 +1,5 @@
-﻿<mtc:MetroWindow x:Class="bayoen.Windows.MainWindow"
+﻿<mtc:MetroWindow x:Name="Dashboard"
+                 x:Class="bayoen.Windows.MainWindow"
                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:mtc="http://metro.mahapps.com/winfx/xaml/controls"
@@ -9,6 +10,10 @@
                  ShowIconOnTitleBar="False"
                  BorderThickness="0"
                  Height="300" MinHeight="150"
-                 Width="400" MinWidth="150">
-    <TextBlock x:Name="TextOut" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                 Width="400" MinWidth="150"
+                 
+                 Closing="Dashboard_Closing">
+    <ScrollViewer>
+        <TextBlock x:Name="TextOut" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    </ScrollViewer>
 </mtc:MetroWindow>

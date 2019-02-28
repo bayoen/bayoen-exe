@@ -8,6 +8,6 @@ namespace bayoen.Data
 {
     public class PlayerSet
     {
-        public List<PlayerInfo> Players;
+        public List<PlayerRecord> Players;
     }
 }

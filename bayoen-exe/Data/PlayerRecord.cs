@@ -5,36 +5,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using bayoen.Memory;
 using js = Newtonsoft.Json;
 using jl = Newtonsoft.Json.Linq;
 
 namespace bayoen.Data
 {
-    public class PlayerInfo : ICloneable
+    public class PlayerRecord : ICloneable
     {
-        public int ID32 { get; private set; }
-        public string Name { get; private set; }
 
-        public int Rating { get; private set; }
+        //public List<int> Scores { get; private set; }
+        public List<int> Scores { get; set; }
 
-        public string Region { get; private set; }
-        public string Rank { get; private set; }
-        public string League { get; private set; }
+        public PlayerRecord() { }
 
-        //public int PlayStyle { get; private set; }
+        public PlayerRecord(int index) => Initialize(index);
 
-        public PPTPlayTypes PlayType { get; private set; }
-
-        public PlayerInfo() { }
-
-        public PlayerInfo(int index) => Check(index);
-
-        public bool Check(int index)
+        public bool Initialize(int index)
         {
-            this.ID32 = Core.PPTMemory.PlayerSteamID32Forced(index);
-            this.Name = Core.PPTMemory.PlayerNameDirect(index);
-            this.Rating = Core.PPTMemory.PlayerRatingForced(index);
-            this.PlayType = Core.PPTMemory.PlayType(index) ? PPTPlayTypes.Tetris : PPTPlayTypes.PuyoPuyo;
+
+            this.Scores = new List<int>();
 
             return true;
         }
@@ -44,9 +34,9 @@ namespace bayoen.Data
             return MemberwiseClone();
         }
 
-        public static PlayerInfo Load(string src)
+        public static PlayerRecord Load(string src)
         {
-            PlayerInfo output = null;
+            PlayerRecord output = null;
             bool brokenFlag = false;
             if (File.Exists(src))
             {
@@ -54,7 +44,7 @@ namespace bayoen.Data
 
                 try
                 {
-                    output = js::JsonConvert.DeserializeObject<PlayerInfo>(rawString, Config.JSONSerializerSetting);
+                    output = js::JsonConvert.DeserializeObject<PlayerRecord>(rawString, Config.JSONSerializerSetting);
                 }
                 catch
                 {
@@ -68,7 +58,7 @@ namespace bayoen.Data
 
             if (brokenFlag)
             {
-                output = new PlayerInfo();
+                output = new PlayerRecord();
                 File.WriteAllText(src, output.ToJSON().ToString(), Config.TextEncoding);
             }
 
@@ -94,9 +84,9 @@ namespace bayoen.Data
             return jl::JObject.Parse(js::JsonConvert.SerializeObject(this, Config.JSONSerializerSetting));
         }
 
-        public static PlayerInfo FromJSON(jl::JObject jobject)
+        public static PlayerRecord FromJSON(jl::JObject jobject)
         {
-            return js::JsonConvert.DeserializeObject<PlayerInfo>(jobject.ToString(), Config.JSONSerializerSetting);
+            return js::JsonConvert.DeserializeObject<PlayerRecord>(jobject.ToString(), Config.JSONSerializerSetting);
         }
     }
 }
