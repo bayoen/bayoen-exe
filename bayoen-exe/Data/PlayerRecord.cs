@@ -23,7 +23,6 @@ namespace bayoen.Data
 
         public bool Initialize(int index)
         {
-
             this.Scores = new List<int>();
 
             return true;

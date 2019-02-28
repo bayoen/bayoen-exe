@@ -39,8 +39,8 @@ namespace bayoen.Memory
 
         //public PPTPlayTypes PlayType
 
-        public int PlayerRating(int index) => this.ReadInt32(this._playerAddress + index * 0x50 + 0x30);
-        public int PlayerRatingForced(int index) => this.ReadInt32(this.PlayerAddress + index * 0x50 + 0x30);
+        public int PlayerRating(int index) => this.ReadInt32(new IntPtr(0x140473760), 0x20, index * 0x50 + 0x108);
+
 
         public bool PlayType(int index) => this.ReadBinary(6, new IntPtr(0x140598C27 + index * 0x68));
 

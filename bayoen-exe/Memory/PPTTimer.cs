@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -116,9 +117,11 @@ namespace bayoen.Memory
                         {
                             if (Core.CurrentMatch.MatchEnd == DateTime.MinValue)
                             {
-                                if (Core.CurrentMatch.MatchScores().IndexOf(Core.CurrentMatch.WinCount) > -1)
+                                if (Core.CurrentMatch.MatchWins().IndexOf(Core.CurrentMatch.WinCount) > -1)
                                 {
                                     Core.CurrentMatch.End();
+                                    if (!Directory.Exists(Config.StatFolderName)) Directory.CreateDirectory(Config.StatFolderName);
+                                    Core.CurrentMatch.Save(Path.Combine(Config.StatFolderName, $"match_s{Core.PPTMemory.MySteamID32}_t{Core.CurrentMatch.MatchBegin.ToString("yyyy_MM_dd_hh_mm_ss")}.json"));
                                 }
                             }
                         }                        

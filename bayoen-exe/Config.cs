@@ -14,7 +14,7 @@ namespace bayoen
 
         public static readonly string PPTName = "puyopuyotetris";
 
-        public static readonly string StatFolderName = 
+        public static readonly string StatFolderName = "stats";
 
         public static readonly TimeSpan PPTTimeSpan = new TimeSpan(0, 0, 0, 0, 10);
 
@@ -34,6 +34,6 @@ namespace bayoen
             }
         };
 
-        public static readonly int MinimumFrameTick = 5;
+        public static readonly int MinimumFrameTick = 20;
 }
 }

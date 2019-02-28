@@ -41,9 +41,6 @@ namespace bayoen
         private static GameRecord _currentGame;
         public static GameRecord CurrentGame => _currentGame ?? (_currentGame = new GameRecord());
 
-        private static PlayerSet _currentPlayers;
-        public static PlayerSet CurrentPlayers => _currentPlayers ?? (_currentPlayers = new PlayerSet());
-
         public static int LastFrameTick;
 
         #endregion

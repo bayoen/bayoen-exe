@@ -125,7 +125,6 @@
     <Compile Include="Data\PlayerInfo.cs" />
     <Compile Include="Data\PlayerRecord.cs" />
     <Compile Include="Data\MatchRecord.cs" />
-    <Compile Include="Data\PlayerSet.cs" />
     <Compile Include="Memory\PPTMemory.cs" />
     <Compile Include="Memory\PPTStatus.cs" />
     <Compile Include="Memory\PPTTimer.cs" />

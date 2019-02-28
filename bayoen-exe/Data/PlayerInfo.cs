@@ -33,7 +33,7 @@ namespace bayoen.Data
         {
             this.ID32 = Core.PPTMemory.PlayerSteamID32Forced(index);
             this.Name = Core.PPTMemory.PlayerNameDirect(index);
-            this.Rating = Core.PPTMemory.PlayerRatingForced(index);
+            this.Rating = Core.PPTMemory.PlayerRating(index);
             this.PlayType = Core.PPTMemory.PlayType(index) ? PPTPlayTypes.Tetris : PPTPlayTypes.PuyoPuyo;
 
             return true;

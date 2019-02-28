@@ -41,17 +41,17 @@ namespace bayoen.Data
             {
                 if (Core.PPTStatus.GameFrame - Core.LastFrameTick > Config.MinimumFrameTick)
                 {
-                    //Core.CurrentGame.Ticks.Add(Core.PPTStatus.GameFrame);
-                    //for (int playerIndex = 0; playerIndex < this.PlayerRecords.Count; playerIndex++)
-                    //{
-                    //    PlayerRecords[playerIndex].Scores.Add(Core.PPTMemory.PlayerScore(playerIndex));
-                    //}
-
-                    Core.CurrentGame.Ticks = new List<int>() { Core.PPTStatus.GameFrame };
+                    Core.CurrentGame.Ticks.Add(Core.PPTStatus.GameFrame);
                     for (int playerIndex = 0; playerIndex < this.PlayerRecords.Count; playerIndex++)
                     {
-                        PlayerRecords[playerIndex].Scores = new List<int>() { Core.PPTMemory.PlayerScore(playerIndex) };
+                        PlayerRecords[playerIndex].Scores.Add(Core.PPTMemory.PlayerScore(playerIndex));
                     }
+
+                    //Core.CurrentGame.Ticks = new List<int>() { Core.PPTStatus.GameFrame };
+                    //for (int playerIndex = 0; playerIndex < this.PlayerRecords.Count; playerIndex++)
+                    //{
+                    //    PlayerRecords[playerIndex].Scores = new List<int>() { Core.PPTMemory.PlayerScore(playerIndex) };
+                    //}
 
                     Core.LastFrameTick = Core.PPTStatus.GameFrame;
                 }

@@ -23,9 +23,11 @@ namespace bayoen.Data
         public int LobbyMax { get; private set; }
         public int LobbySize { get; private set; }
         public int WinCount { get; private set; }
+        public List<int> Wins { get; private set; }
+        public List<int> Places { get; private set; }
         public List<int> Winners { get; private set; }
 
-        private bool HeadReversed { get; set; }
+        private bool _isHeadReversed { get; set; }
 
         public List<PlayerInfo> Players { get; private set; }
         public List<GameRecord> Games { get; private set; }
@@ -41,8 +43,9 @@ namespace bayoen.Data
             this.LobbyMax = Core.PPTStatus.LobbyMax;
             this.LobbySize = Core.PPTStatus.LobbySize;
             this.WinCount = Core.PPTMemory.WinCountForced;
+            this.Wins = Enumerable.Repeat(0, this.LobbySize).ToList();
             this.Winners = new List<int>();
-            this.HeadReversed = this.IsHeaderRevered(Core.PPTStatus, Core.PPTMemory);
+            this._isHeadReversed = this.IsHeaderRevered(Core.PPTStatus, Core.PPTMemory);
 
             this.Players = Enumerable.Range(0, Core.PPTStatus.LobbySize).Select(x => new PlayerInfo(x)).ToList();
             this.Games = new List<GameRecord>();
@@ -57,10 +60,10 @@ namespace bayoen.Data
             return true;
         }
 
-        public List<int> MatchScores()
+        public List<int> MatchWins()
         {
-            List<int> scores = new List<int>() { 0, 0, 0, 0 };
-            this.Games.ForEach(x => x.Winners.ForEach(y => scores[y]++));
+            List<int> scores = Enumerable.Repeat(0, this.LobbySize).ToList();
+            this.Games.ForEach(x => x.Winners.ForEach(y => scores[y-1]++));
             return scores;
         }
 
@@ -68,11 +71,11 @@ namespace bayoen.Data
         {
             this.MatchEnd = DateTime.UtcNow;
 
-            List<int> scores = this.MatchScores();
-            for (int playerIndex = 0; playerIndex < scores.Count; playerIndex++)
-            {
-                if (scores[playerIndex] == this.WinCount) this.Winners.Add(playerIndex);
-            }            
+            this.Wins = this.MatchWins();
+            for (int playerIndex = 0; playerIndex < this.Wins.Count; playerIndex++)
+            {                
+                if (this.Wins[playerIndex] == this.WinCount) this.Winners.Add(playerIndex+1);
+            }
         }
 
         private PPTGameCategories MainStateToCatergory(PPTMainStates state)
