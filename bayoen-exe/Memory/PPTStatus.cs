@@ -24,6 +24,8 @@ namespace bayoen.Memory
         public int GameFrame { get; private set; }
         public int SceneFrame { get; private set; }
 
+        public int MyRating { get; private set; }
+
         public List<int> PlayerStars { get; private set; }
 
         public bool PuzzleLeagueGameFinishFlag { get; private set; }
@@ -105,6 +107,7 @@ namespace bayoen.Memory
                 this.SceneFrame = Core.PPTMemory.SceneFrame;
                 this.PuzzleLeagueGameFinishFlag = Core.PPTMemory.PuzzleLeagueGameFinishFlag;
                 this.PlayerStars = Core.PPTMemory.PlayerStars;
+                this.MyRating = Core.PPTMemory.MyRating;
 
                 return true;
             }

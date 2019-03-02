@@ -15,6 +15,7 @@ namespace bayoen.Data
     {
 
         //public List<int> Scores { get; private set; }
+        [js::JsonProperty(PropertyName = "Scores")]
         public List<int> Scores { get; set; }
 
         public PlayerRecord() { }

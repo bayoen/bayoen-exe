@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
-
 using bayoen.Data;
 using bayoen.Memory;
 using bayoen.Windows;
@@ -21,6 +20,11 @@ namespace bayoen
 
         private static MainWindow _mainWindow;
         public static MainWindow MainWindow => _mainWindow ?? (_mainWindow = new MainWindow());
+
+#if DEBUG
+        private static DebugWindow _debugWindow;
+        public static DebugWindow DebugWindow => _debugWindow ?? (_debugWindow = new DebugWindow());
+#endif
 
         private static PPTMemory _pptMemory;
         public static PPTMemory PPTMemory => _pptMemory ?? (_pptMemory = new PPTMemory(Config.PPTName));
@@ -39,9 +43,9 @@ namespace bayoen
         public static MatchRecord CurrentMatch => _currentMatch ?? (_currentMatch = new MatchRecord());
 
         private static GameRecord _currentGame;
-        public static GameRecord CurrentGame => _currentGame ?? (_currentGame = new GameRecord());
+        public static GameRecord CurrentGame => _currentGame ?? (_currentGame = new GameRecord());        
 
-        public static int LastFrameTick;
+        public static int LastFrameTick;       
 
         #endregion
 
@@ -50,6 +54,10 @@ namespace bayoen
             TrayIcon.IconText = Config.ProjectName;
 
             MainWindow.Show();
+
+#if DEBUG
+            DebugWindow.Show();
+#endif
 
             OldPPTStatus = new PPTStatus();
             OldPPTStatus.Check();

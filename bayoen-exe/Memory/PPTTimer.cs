@@ -25,28 +25,26 @@ namespace bayoen.Memory
 
             this.PuzzleLeagueTick();
 
-            Core.MainWindow.TextOut.Text = Core.CurrentMatch.ToJSON().ToString();
-
+            //Core.MainWindow.TextOut.Text = Core.CurrentMatch.ToJSON().ToString();
 
             Core.OldPPTStatus = Core.PPTStatus.Clone() as PPTStatus;
-            
-            //#region [text dashboard]
-            //if (false) // Core.PPTMemory.CheckProcess()
-            //{
-            //   // Do scan PPT
-            //    Core.MainWindow.TextOut.Text = $"{Core.PPTStatus.MainState.ToString()}"
-            //        + $"\n{(Core.PPTStatus.SubState == PPTSubStates.Empty ? "" : Core.PPTStatus.SubState.ToString())}"
-            //        + $"\n{(Core.PPTStatus.GameMode == PPTGameModes.None ? "" : Core.PPTStatus.GameMode.ToString())}{(Core.PPTStatus.IsEndurance ? " (Endurance)" : "")}"
-            //        + $"\n\nGameFrame: {Core.PPTMemory.GameFrame}"
-            //        + $"\nSceneFrame: {Core.PPTMemory.SceneFrame}"
-            //        + $"\nStar: {Core.PPTMemory.PlayerStar(0)}-{Core.PPTMemory.PlayerStar(1)}-{Core.PPTMemory.PlayerStar(2)}-{Core.PPTMemory.PlayerStar(3)}"
-            //        + $"\nName: {Core.PPTMemory.PlayerNameForced(0)} - {Core.PPTMemory.PlayerNameForced(1)} - {Core.PPTMemory.PlayerNameForced(2)} - {Core.PPTMemory.PlayerNameForced(3)}"
-            //        + $"\nScore: {string.Join(" - ", Core.PPTMemory.PlayerScores)}"
-            //        + $"\nRating: {Core.PPTMemory.PlayerRatingForced(0)} - {Core.PPTMemory.PlayerRatingForced(1)} - {Core.PPTMemory.PlayerRatingForced(2)} - {Core.PPTMemory.PlayerRatingForced(3)}"
-            //        + $"\nSteam: {Core.PPTMemory.PlayerSteamID32Forced(0)} - {Core.PPTMemory.PlayerSteamID32Forced(1)} - {Core.PPTMemory.PlayerSteamID32Forced(2)} - {Core.PPTMemory.PlayerSteamID32Forced(3)}";
 
-            //}
-            //#endregion
+#if DEBUG
+            Core.DebugWindow.TextOut.Text = $"MainState: {Core.PPTStatus.MainState.ToString()}"
+                + $"\nSubState: {(Core.PPTStatus.SubState == PPTSubStates.Empty ? "" : Core.PPTStatus.SubState.ToString())}"
+                + $"\nGameMode: {(Core.PPTStatus.GameMode == PPTGameModes.None ? "" : Core.PPTStatus.GameMode.ToString())}{(Core.PPTStatus.IsEndurance ? " (Endurance)" : "")}"
+                + $"\nMyRating: {Core.PPTMemory.MyRating}";
+#endif
+
+            #region [text dashboard]
+            if (true) // Core.PPTMemory.CheckProcess()
+            {
+                // Do scan PPT
+
+
+
+            }
+            #endregion
         }
 
         private void PuzzleLeagueTick()
@@ -72,7 +70,6 @@ namespace bayoen.Memory
                             {
                                 if (Core.PPTStatus.PlayerStars.SequenceEqual(Core.OldPPTStatus.PlayerStars))
                                 {
-                                    Core.MainWindow.TextOut.Text += " [Draw]";
                                     Core.CurrentMatch.SaveCurrentGame();
                                 }
                             }
@@ -120,10 +117,26 @@ namespace bayoen.Memory
                                 if (Core.CurrentMatch.MatchWins().IndexOf(Core.CurrentMatch.WinCount) > -1)
                                 {
                                     Core.CurrentMatch.End();
-                                    if (!Directory.Exists(Config.StatFolderName)) Directory.CreateDirectory(Config.StatFolderName);
-                                    Core.CurrentMatch.Save(Path.Combine(Config.StatFolderName, $"match_s{Core.PPTMemory.MySteamID32}_t{Core.CurrentMatch.MatchBegin.ToString("yyyy_MM_dd_hh_mm_ss")}.json"));
                                 }
                             }
+                        }
+
+                        if (Core.PPTStatus.MyRating != Core.OldPPTStatus.MyRating)
+                        {                            
+                            if (Core.CurrentMatch.MatchEnd != DateTime.MinValue)
+                            {
+                                Core.CurrentMatch.GetRatingGain();
+                            }
+                            else
+                            {
+                                Core.CurrentMatch.SaveCurrentGame();
+                                Core.CurrentMatch.Crashed();
+                            }
+                            
+                            if (!Directory.Exists(Config.StatFolderName)) Directory.CreateDirectory(Config.StatFolderName);
+                            Core.CurrentMatch.Save(Path.Combine(Config.StatFolderName, $"match_s{Core.PPTMemory.MySteamID32}_t{Core.CurrentMatch.MatchBegin.ToString("yyMMdd_hhmmss")}.json"));
+
+                            Core.MainWindow.MatchNavigator.CheckMatchDataGrid();
                         }                        
                     }
                 }

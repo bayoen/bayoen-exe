@@ -37,9 +37,11 @@ namespace bayoen.Memory
         public string PlayerNameForced(int index) => this.ReadValidString(this.PlayerAddress + index * 0x50, Config.PlayerNameSize);
         public string PlayerNameDirect(int index) => this.ReadValidString(new IntPtr(0x140598BD4 + index * 0x68), Config.PlayerNameSize);
 
+        public string PlayerNameRaw(int index) => this.ReadStringUnicode(this._playerAddress + index * 0x50, Config.PlayerNameSize);
+        
         //public PPTPlayTypes PlayType
 
-        public int PlayerRating(int index) => this.ReadInt32(new IntPtr(0x140473760), 0x20, index * 0x50 + 0x108);
+        public int PlayerRating(int index) => this.ReadInt16(new IntPtr(0x140473760), 0x20, index * 0x50 + 0x108);
 
 
         public bool PlayType(int index) => this.ReadBinary(6, new IntPtr(0x140598C27 + index * 0x68));
@@ -64,7 +66,8 @@ namespace bayoen.Memory
         public int LobbyMax => this.ReadInt32(new IntPtr(0x140473760), 0x20, 0xB8);
 
         public string MyName => this.ReadValidString(new IntPtr(0x1405A2010), Config.PlayerNameSize);
-        public int MySteamID32               => this.ReadInt32(new IntPtr(0x1405A2010));
+        public int MySteamID32 => this.ReadInt32(new IntPtr(0x1405A2010));
+        public int MyRating => this.ReadInt16(new IntPtr(0x140599FF0));
         public int MyIndex
         {
             get
@@ -197,11 +200,25 @@ namespace bayoen.Memory
             return pm.ReadInt32(pm.ReadOffset(pOffset, offsets));
         }
 
+        public static Int32 ReadInt16(this PPTMemory pm, IntPtr pOffset, params Int32[] offsets)
+        {
+            return pm.ReadInt16(pm.ReadOffset(pOffset, offsets));
+        }
+
+        public static string ReadStringUnicode(this PPTMemory pm, IntPtr pOffset, uint pSize, params Int32[] offsets)
+        {
+            return pm.ReadStringUnicode(pm.ReadOffset(pOffset, offsets), pSize);
+        }
+
         public static string ReadValidString(this PPTMemory pm, IntPtr pOffset, uint pSize, params Int32[] offsets)
         {
-            string tempString = pm.ReadStringUnicode(pm.ReadOffset(pOffset, offsets), pSize);
-            int nullIndex = tempString.IndexOf("\0");
-            if (nullIndex > -1) tempString = tempString.Remove(nullIndex);
+            string tempString = pm.ReadStringUnicode(pOffset, pSize, offsets);
+
+            int escapeIndex = tempString.IndexOf("\u0000");
+            if (escapeIndex > -1) tempString = tempString.Remove(escapeIndex);
+
+            escapeIndex = tempString.IndexOf("\\u");
+            if (escapeIndex > -1) tempString = tempString.Remove(escapeIndex);
 
             return tempString;
         }

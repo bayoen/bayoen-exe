@@ -108,4 +108,11 @@ namespace bayoen.Data
         Swap,
         Fusion,
     }
+
+    public enum PPTMatchCrashes
+    {
+        None,
+        ByMe,
+        NotMe,
+    }
 }

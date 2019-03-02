@@ -26,6 +26,8 @@ namespace bayoen.Windows
         public MainWindow()
         {
             this.InitializeComponent();
+
+            this.MatchNavigator.CheckMatchDataGrid();
         }
 
         private void Dashboard_Closing(object sender, CancelEventArgs e)

@@ -12,14 +12,17 @@ namespace bayoen.Data
 {
     public class GameRecord : ICloneable
     {
+        [js::JsonProperty(PropertyName = "GameBegin")]
         public DateTime GameBegin { get; private set; }
+        [js::JsonProperty(PropertyName = "GameEnd")]
         public DateTime GameEnd { get; private set; }
+        [js::JsonProperty(PropertyName = "Winners")]
         public List<int> Winners { get; private set; }
-
+        [js::JsonProperty(PropertyName = "Places")]
         public List<int> Places { get; private set; }
-
+        [js::JsonProperty(PropertyName = "Ticks")]
         public List<int> Ticks { get; private set; }
-
+        [js::JsonProperty(PropertyName = "PlayerRecords")]
         public List<PlayerRecord> PlayerRecords { get; private set; }
 
         public bool Initialize()
@@ -46,12 +49,6 @@ namespace bayoen.Data
                     {
                         PlayerRecords[playerIndex].Scores.Add(Core.PPTMemory.PlayerScore(playerIndex));
                     }
-
-                    //Core.CurrentGame.Ticks = new List<int>() { Core.PPTStatus.GameFrame };
-                    //for (int playerIndex = 0; playerIndex < this.PlayerRecords.Count; playerIndex++)
-                    //{
-                    //    PlayerRecords[playerIndex].Scores = new List<int>() { Core.PPTMemory.PlayerScore(playerIndex) };
-                    //}
 
                     Core.LastFrameTick = Core.PPTStatus.GameFrame;
                 }

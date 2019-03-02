@@ -12,17 +12,23 @@ namespace bayoen.Data
 {
     public class PlayerInfo : ICloneable
     {
+        [js::JsonProperty(PropertyName = "ID32")]
         public int ID32 { get; private set; }
+        [js::JsonProperty(PropertyName = "Name")]
         public string Name { get; private set; }
-
+        [js::JsonProperty(PropertyName = "NameRaw")]
+        public string NameRaw { get; private set; }
+        [js::JsonProperty(PropertyName = "Rating")]
         public int Rating { get; private set; }
-
-        public string Region { get; private set; }
-        public string Rank { get; private set; }
-        public string League { get; private set; }
-
+        //[js::JsonProperty(PropertyName = "Region")]
+        //public string Region { get; private set; }
+        //[js::JsonProperty(PropertyName = "Rank")]
+        //public string Rank { get; private set; }
+        //[js::JsonProperty(PropertyName = "League")]
+        //public string League { get; private set; }
+        //[js::JsonProperty(PropertyName = "PlayStyle")]
         //public int PlayStyle { get; private set; }
-
+        [js::JsonProperty(PropertyName = "PlayType")]
         public PPTPlayTypes PlayType { get; private set; }
 
         public PlayerInfo() { }
@@ -32,7 +38,8 @@ namespace bayoen.Data
         public bool Check(int index)
         {
             this.ID32 = Core.PPTMemory.PlayerSteamID32Forced(index);
-            this.Name = Core.PPTMemory.PlayerNameDirect(index);
+            this.Name = Core.PPTMemory.PlayerNameForced(index);
+            this.NameRaw = Core.PPTMemory.PlayerNameRaw(index);
             this.Rating = Core.PPTMemory.PlayerRating(index);
             this.PlayType = Core.PPTMemory.PlayType(index) ? PPTPlayTypes.Tetris : PPTPlayTypes.PuyoPuyo;
 
