@@ -34,7 +34,7 @@
         <ScrollViewer x:Name="ContentScrollViewer" Grid.Row="0" Grid.Column="2">
             <Grid>
                 <layout:HomeTabGrid x:Name="HomeTabGrid"/>
-                <layout:StatsTabGrid x:Name="StatsTabGrid"/>
+                <!--<layout:StatsTabGrid x:Name="StatsTabGrid"/>-->
             </Grid>
         </ScrollViewer>
 

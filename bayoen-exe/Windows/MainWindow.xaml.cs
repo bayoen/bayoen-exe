@@ -15,13 +15,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
+using bayoen.Utility;
+
 using mtc = MahApps.Metro.Controls;
+
 
 namespace bayoen.Windows
 {
-    /// <summary>
-    /// bayoen.Windows.MainWindow
-    /// </summary>
     public partial class MainWindow : mtc::MetroWindow
     {
         public MainWindow()
@@ -30,15 +30,11 @@ namespace bayoen.Windows
 
             this.Background = new ImageBrush(bayoen.Properties.Resources.img_wallpaper.ToImageSource())
             {
-                //Viewbox = new Rect(0,0, System.Windows.SystemParameters.PrimaryScreenWidth, System.Windows.SystemParameters.PrimaryScreenHeight),
-                //ViewboxUnits = BrushMappingMode.RelativeToBoundingBox,
                 AlignmentX = AlignmentX.Left,
                 AlignmentY = AlignmentY.Top,
                 Opacity = 0.08,
                 Stretch = Stretch.UniformToFill,
             };
-
-            //this.MatchNavigator.CheckMatchDataGrid();
         }
 
         private void Dashboard_Closing(object sender, CancelEventArgs e)
@@ -55,8 +51,7 @@ namespace bayoen.Windows
 
     public static partial class ExtendedMethods
     {
-        [System.Runtime.InteropServices.DllImport("gdi32.dll", SetLastError = true)]
-        private static extern bool DeleteObject(IntPtr hObject);
+        
 
         public static ImageSource ToImageSource(this System.Drawing.Icon icon)
         {
@@ -76,7 +71,7 @@ namespace bayoen.Windows
                 Int32Rect.Empty,
                 System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
 
-            if (!DeleteObject(hBitmap))
+            if (!Gdi32.DeleteObject(hBitmap))
             {
                 throw new System.ComponentModel.Win32Exception();
             }
