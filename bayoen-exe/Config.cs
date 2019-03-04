@@ -44,5 +44,7 @@ namespace bayoen
         public static readonly int MinimumFrameTick = 20;
 
         public static readonly int MatchMax = 10;
+
+        public static readonly double SplitterThickness = 4;
     }
 }

@@ -136,7 +136,7 @@ namespace bayoen.Memory
                             if (!Directory.Exists(Config.StatFolderName)) Directory.CreateDirectory(Config.StatFolderName);
                             Core.CurrentMatch.Save(Path.Combine(Config.StatFolderName, $"match_s{Core.PPTMemory.MySteamID32}_t{Core.CurrentMatch.MatchBegin.ToString("yyMMdd_hhmmss")}.json"));
 
-                            Core.MainWindow.MatchNavigator.CheckMatchDataGrid();
+                            //Core.MainWindow.MatchNavigator.CheckMatchDataGrid();
                         }                        
                     }
                 }

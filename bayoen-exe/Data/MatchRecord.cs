@@ -171,8 +171,9 @@ namespace bayoen.Data
 
                 return $"{opponentInfo.Name} ({opponentInfo.Rating}, {opponentInfo.PlayType.ToString()})";
             }
-        }        
+        }
 
+        [js.JsonIgnore]
         public string ResultColumn
         {
             get

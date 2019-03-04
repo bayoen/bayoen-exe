@@ -1,8 +1,7 @@
-﻿<Grid x:Class="bayoen.Windows.MatchNavigator"        
+﻿<Grid x:Class="bayoen.Windows.Contents.MatchNavigatorGrid"        
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mtc="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:ow="http://oxyplot.org/wpf"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:local="clr-namespace:bayoen.Windows;assembly=bayoen"
@@ -21,7 +20,7 @@
         <Button x:Name="PrevPageButton" Content="Prev" Margin="5" VerticalAlignment="Center" Style="{StaticResource AccentedSquareButtonStyle}" Click="PrevPageButton_Click"/>
         <Button x:Name="NextPageButton" Content="Next" Margin="5" VerticalAlignment="Center" Style="{StaticResource AccentedSquareButtonStyle}" Click="NextPageButton_Click"/>
     </StackPanel>
-    
+
     <DataGrid x:Name="DataGrid" Grid.Row="1"
                 AutoGenerateColumns="False" CanUserAddRows="False"
                 CanUserDeleteRows="False" CanUserResizeColumns="False"
@@ -32,10 +31,9 @@
                 LoadingRowDetails="DataGrid_LoadingRowDetails">
         <DataGrid.Columns>
             <DataGridTextColumn Header="Time" Binding="{Binding TimeColumn}"/>
-            <DataGridTextColumn Header="Play Type" Binding="{Binding MyPlayTypeColumn}"/>
+            <DataGridTextColumn Header="My Type" Binding="{Binding MyPlayTypeColumn}"/>
             <DataGridTextColumn Header="Opponent" Binding="{Binding OpponentInfoColumn}"/>
             <DataGridTextColumn Header="Result" Binding="{Binding ResultColumn}"/>
         </DataGrid.Columns>
     </DataGrid>
-    <ow:PlotView x:Name="GameScorePlotView" Grid.Row="2" MinHeight="300" MinWidth="100"/>
 </Grid>

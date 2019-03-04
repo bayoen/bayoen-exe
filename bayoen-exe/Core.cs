@@ -36,9 +36,6 @@ namespace bayoen
         private static PPTTimer _pptTimer;
         public static PPTTimer PPTTimer => _pptTimer ?? (_pptTimer = new PPTTimer(Config.PPTTimeSpan));
 
-        private static PPTTimer _bayoenTimer;
-        public static PPTTimer BayoenTimer => _bayoenTimer ?? (_bayoenTimer = new PPTTimer(Config.PPTTimeSpan));
-
         private static MatchRecord _currentMatch;
         public static MatchRecord CurrentMatch => _currentMatch ?? (_currentMatch = new MatchRecord());
 
@@ -62,8 +59,7 @@ namespace bayoen
             OldPPTStatus = new PPTStatus();
             OldPPTStatus.Check();
 
-            PPTTimer.Start();
-            BayoenTimer.Start();            
+            PPTTimer.Start();       
         }
     }
 }

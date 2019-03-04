@@ -13,15 +13,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using op = OxyPlot;
-
-namespace bayoen.Windows
+namespace bayoen.Windows.Layouts
 {
-    public partial class MatchScorePlot : Grid
+    public partial class RowGridSplitter : GridSplitter
     {
-        public MatchScorePlot()
+        public RowGridSplitter()
         {
             InitializeComponent();
+
+            this.Height = Config.SplitterThickness;
         }
     }
 }

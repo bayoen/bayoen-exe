@@ -18,34 +18,24 @@ using System.Windows.Shapes;
 
 using bayoen.Data;
 
-using OxyPlot;
-using OxyPlot.Series;
-
-namespace bayoen.Windows
+namespace bayoen.Windows.Contents
 {
     /// <summary>
     /// MatchNavigator.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class MatchNavigator : Grid
+    public partial class MatchNavigatorGrid : Grid
     {
         public List<MatchRecord> Matches { get; private set; }
 
         public int MatchIndex { get; private set; }
 
-        public PlotModel GameScorePlotModel { get; private set; }
-
-        public MatchNavigator()
+        public MatchNavigatorGrid()
         {
             InitializeComponent();
 
             this.Matches = new List<MatchRecord>();
 
             this.MatchIndex = 0;            
-
-            this.GameScorePlotModel = new PlotModel();
-            this.GameScorePlotModel.Series.Add(new FunctionSeries(Math.Sin, 0, Math.PI * 8, 200, "sin(x)"));
-
-            this.GameScorePlotView.Model = this.GameScorePlotModel;
         }
 
         public void CheckMatchDataGrid()

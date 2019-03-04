@@ -133,8 +133,8 @@
     <Compile Include="Windows\DebugWindow.xaml.cs">
       <DependentUpon>DebugWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\MatchNavigator.xaml.cs">
-      <DependentUpon>MatchNavigator.xaml</DependentUpon>
+    <Compile Include="Windows\Contents\MatchNavigatorGrid.xaml.cs">
+      <DependentUpon>MatchNavigatorGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\GameRecord.cs" />
     <Compile Include="Data\PlayerInfo.cs" />
@@ -143,13 +143,47 @@
     <Compile Include="Memory\PPTMemory.cs" />
     <Compile Include="Memory\PPTStatus.cs" />
     <Compile Include="Memory\PPTTimer.cs" />
-    <Compile Include="Windows\MatchScorePlot.xaml.cs">
-      <DependentUpon>MatchScorePlot.xaml</DependentUpon>
+    <Compile Include="Windows\Contents\MatchScorePlotGrid.xaml.cs">
+      <DependentUpon>MatchScorePlotGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Layouts\ColumnGridSplitter.xaml.cs">
+      <DependentUpon>ColumnGridSplitter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Layouts\RowGridSplitter.xaml.cs">
+      <DependentUpon>RowGridSplitter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Layouts\TabNavigatorListViewItem.xaml.cs">
+      <DependentUpon>TabNavigatorListViewItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MainWindow.Components.cs" />
     <Compile Include="Windows\SettingWindow.xaml.cs">
       <DependentUpon>SettingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Layouts\HomeTabGrid.xaml.cs">
+      <DependentUpon>HomeTabGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Layouts\StatsTabGrid.xaml.cs">
+      <DependentUpon>StatsTabGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Layouts\StatusBorder.xaml.cs">
+      <DependentUpon>StatusBorder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Layouts\TabNavigatorListView.xaml.cs">
+      <DependentUpon>TabNavigatorListView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Windows\DebugWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Layouts\ColumnGridSplitter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Layouts\RowGridSplitter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Layouts\TabNavigatorListViewItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -170,15 +204,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\MatchNavigator.xaml">
+    <Page Include="Windows\Contents\MatchNavigatorGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\MatchScorePlot.xaml">
+    <Page Include="Windows\Contents\MatchScorePlotGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\SettingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Layouts\HomeTabGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Layouts\StatsTabGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Layouts\StatusBorder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Layouts\TabNavigatorListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -208,6 +258,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Resources\MainWindow.Wallpaper.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
