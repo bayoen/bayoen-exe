@@ -7,10 +7,10 @@
       Margin="10,0,0,0">
 
     <Grid.Resources>
-        <!--<Style TargetType="{x:Type GroupBox}" BasedOn="{StaticResource {x:Type mtc:Group}}">-->
         <Style TargetType="{x:Type GroupBox}" BasedOn="{StaticResource MetroGroupBox}">
             <Setter Property="Margin" Value="0,0,10,10"/>
-            <Setter Property="Padding" Value="8"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="mtc:ControlsHelper.ContentCharacterCasing" Value="Normal"/>
         </Style>
     </Grid.Resources>
 
@@ -22,25 +22,26 @@
 
     <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*"/>
-        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="{Binding Width, ElementName=RecentGroupBox}"/>
     </Grid.ColumnDefinitions>
 
     <TextBlock x:Name="HeaderTextBlock" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
         Text="Home" FontSize="18" FontWeight="ExtraBold" Margin="0,10,10,10"/>
 
-    <GroupBox x:Name="NowGroupBox" Grid.Row="1" Grid.Column="0"
-        Header="Now">
+    <GroupBox x:Name="NowGroupBox" Grid.Row="1" Grid.Column="0"                           
+              Header="Now">
         <TextBlock Text="abab"/>
     </GroupBox>
 
-    <GroupBox x:Name="DetailGroupBox" Grid.Row="2" Grid.Column="0"
-        Header="Detail">
+    <GroupBox x:Name="DetailGroupBox" Grid.Row="2" Grid.Column="0"              
+              Header="Detail">
         <TextBlock Text="abab"/>
     </GroupBox>
 
     <GroupBox x:Name="RecentGroupBox" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
-        Header="Recent">
-        <content:MatchNavigatorGrid x:Name="RecentNavigator"/>
+              MaxWidth="600"
+              Header="Recent">
+        <content:MatchViewerGrid x:Name="RecentNavigator" IsRecentOnly="True"/>
     </GroupBox>
 
 </Grid>

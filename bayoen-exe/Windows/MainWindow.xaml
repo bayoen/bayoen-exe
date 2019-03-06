@@ -5,8 +5,8 @@
                  xmlns:mtc="http://metro.mahapps.com/winfx/xaml/controls"
                  xmlns:layout="clr-namespace:bayoen.Windows.Layouts"
                  xmlns:content="clr-namespace:bayoen.Windows.Contents"
-                 Height="500"
-                 Width="500"
+                 Height="600" MinHeight="500"
+                 Width="800" MinWidth="500"
                  Title="bayoen~"
                  TitleCharacterCasing="Normal"
                  WindowStartupLocation="CenterOwner"
@@ -31,7 +31,7 @@
         <!--Row 0-->
         <layout:TabNavigatorListView x:Name="NavigatorListView" Grid.Row="0" Grid.Column="0" SelectionChanged="NavigatorListView_SelectionChanged"/>
         <layout:ColumnGridSplitter x:Name="ColumnGridSplitter" Grid.Row="0" Grid.Column="1"/>
-        <ScrollViewer x:Name="ContentScrollViewer" Grid.Row="0" Grid.Column="2">
+        <ScrollViewer x:Name="ContentScrollViewer" Grid.Row="0" Grid.Column="2" VerticalScrollBarVisibility="Auto">
             <Grid>
                 <layout:HomeTabGrid x:Name="HomeTabGrid"/>
                 <!--<layout:StatsTabGrid x:Name="StatsTabGrid"/>-->

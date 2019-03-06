@@ -12,12 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using mtc = MahApps.Metro.Controls;
+
 namespace bayoen.Windows
 {
-    /// <summary>
-    /// DebugWindow.xaml에 대한 상호 작용 논리
-    /// </summary>
-    public partial class DebugWindow : MahApps.Metro.Controls.MetroWindow
+    public partial class DebugWindow : mtc::MetroWindow
     {
         public DebugWindow()
         {

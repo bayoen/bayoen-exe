@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -20,14 +18,25 @@ using bayoen.Data;
 
 namespace bayoen.Windows.Contents
 {
-    /// <summary>
-    /// MatchNavigator.xaml에 대한 상호 작용 논리
-    /// </summary>
-    public partial class MatchNavigatorGrid : Grid
+    public partial class MatchViewerGrid : Grid
     {
+        public MatchViewerGrid() : this(false) { }
+
+        public MatchViewerGrid(bool isRecentOnly)
+        {
+            InitializeComponent();
+
+            this.Matches = new List<MatchRecord>();
+
+            this.MatchIndex = 0;
+            this.IsRecentOnly = isRecentOnly;
+        }
+
         public List<MatchRecord> Matches { get; private set; }
 
         public int MatchIndex { get; private set; }
+
+        public bool IsRecentOnly { get; set; }
 
         private bool _isEmpty;
         public bool IsEmpty
@@ -49,17 +58,8 @@ namespace bayoen.Windows.Contents
                     this.NextPageButton.IsEnabled = true;
                 }
 
-                this._isEmpty = value;                
+                this._isEmpty = value;
             }
-        }
-
-        public MatchNavigatorGrid()
-        {
-            InitializeComponent();
-
-            this.Matches = new List<MatchRecord>();
-
-            this.MatchIndex = 0;            
         }
 
         public void CheckMatchDataGrid()
@@ -88,7 +88,7 @@ namespace bayoen.Windows.Contents
                 else index = this.MatchIndex;
 
                 this.PageTextBlock.Text = $"{index + 1}/{pageCount}";
-                
+
                 int entryBegin = index * Config.MatchMax;
                 int entryEnd = Math.Min(files.Count, (index + 1) * Config.MatchMax) - 1;
                 files = files.GetRange(entryBegin, entryEnd - entryBegin + 1);
@@ -99,7 +99,7 @@ namespace bayoen.Windows.Contents
             else
             {
                 this.IsEmpty = true;
-            }                       
+            }
         }
 
         private void PrevPageButton_Click(object sender, RoutedEventArgs e)

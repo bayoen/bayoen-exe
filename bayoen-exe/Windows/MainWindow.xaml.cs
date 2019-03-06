@@ -15,8 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-using bayoen.Utility;
-
+using bayoen.Utility.ExternalMethods;
 using mtc = MahApps.Metro.Controls;
 
 
@@ -35,6 +34,8 @@ namespace bayoen.Windows
                 Opacity = 0.08,
                 Stretch = Stretch.UniformToFill,
             };
+
+            this.HomeTabGrid.RecentNavigator.CheckMatchDataGrid();
         }
 
         private void Dashboard_Closing(object sender, CancelEventArgs e)
@@ -46,37 +47,6 @@ namespace bayoen.Windows
         private void Dashboard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
-        }
-    }
-
-    public static partial class ExtendedMethods
-    {
-        
-
-        public static ImageSource ToImageSource(this System.Drawing.Icon icon)
-        {
-            return HBitmapToImageSource(icon.ToBitmap().GetHbitmap());
-        }
-
-        public static ImageSource ToImageSource(this System.Drawing.Bitmap bitmap)
-        {
-            return HBitmapToImageSource(bitmap.GetHbitmap());
-        }
-
-        private static ImageSource HBitmapToImageSource(IntPtr hBitmap)
-        {
-            ImageSource src = Imaging.CreateBitmapSourceFromHBitmap(
-                hBitmap,
-                IntPtr.Zero,
-                Int32Rect.Empty,
-                System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
-
-            if (!Gdi32.DeleteObject(hBitmap))
-            {
-                throw new System.ComponentModel.Win32Exception();
-            }
-
-            return src;
         }
     }
 }

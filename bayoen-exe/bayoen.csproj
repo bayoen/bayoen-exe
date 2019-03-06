@@ -130,8 +130,14 @@
     <Compile Include="Config.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="Data\Enums.cs" />
+    <Compile Include="Utility\ExternalMethods\System.Drawing.Bitmap.cs" />
+    <Compile Include="Utility\ExternalMethods\System.Drawing.Icon.cs" />
+    <Compile Include="Utility\ExternalMethods\System.IntPtr.cs" />
     <Compile Include="Utility\Gdi32.dll.cs" />
     <Compile Include="Utility\User32.dll.cs" />
+    <Compile Include="Windows\Contents\MatchViewerGrid.xaml.cs">
+      <DependentUpon>MatchViewerGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\DebugWindow.xaml.cs">
       <DependentUpon>DebugWindow.xaml</DependentUpon>
     </Compile>
@@ -173,6 +179,10 @@
     <Compile Include="Windows\Layouts\TabNavigatorListView.xaml.cs">
       <DependentUpon>TabNavigatorListView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Windows\Contents\MatchViewerGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\DebugWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -275,9 +285,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utility\ExternalMethods\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
