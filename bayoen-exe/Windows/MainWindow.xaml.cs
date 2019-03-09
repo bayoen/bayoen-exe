@@ -35,7 +35,7 @@ namespace bayoen.Windows
                 Stretch = Stretch.UniformToFill,
             };
 
-            this.HomeTabGrid.RecentNavigator.CheckMatchDataGrid();
+            this.HomeTabGrid.RecentNavigator.CheckGrid();
         }
 
         private void Dashboard_Closing(object sender, CancelEventArgs e)

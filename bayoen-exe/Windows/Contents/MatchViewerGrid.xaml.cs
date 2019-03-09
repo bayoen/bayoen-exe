@@ -20,23 +20,29 @@ namespace bayoen.Windows.Contents
 {
     public partial class MatchViewerGrid : Grid
     {
-        public MatchViewerGrid() : this(false) { }
-
-        public MatchViewerGrid(bool isRecentOnly)
+        public MatchViewerGrid()
         {
             InitializeComponent();
 
             this.Matches = new List<MatchRecord>();
 
             this.MatchIndex = 0;
-            this.IsRecentOnly = isRecentOnly;
         }
 
         public List<MatchRecord> Matches { get; private set; }
 
         public int MatchIndex { get; private set; }
 
-        public bool IsRecentOnly { get; set; }
+        private bool _isRecentOnly;
+        public bool IsRecentOnly
+        {
+            get => this._isRecentOnly;
+            set
+            {
+                this.PagePanel.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
+                this._isRecentOnly = value;
+            }
+        }
 
         private bool _isEmpty;
         public bool IsEmpty
@@ -44,6 +50,7 @@ namespace bayoen.Windows.Contents
             get => this._isEmpty;
             set
             {
+                if (this.IsRecentOnly) return;
                 if (this._isEmpty == value) return;
 
                 if (value)
@@ -62,10 +69,29 @@ namespace bayoen.Windows.Contents
             }
         }
 
-        public void CheckMatchDataGrid()
+        public void CheckGrid()
         {
             this.DataGrid.ItemsSource = null;
 
+            if (Directory.Exists(Config.StatFolderName))
+            {
+                if (this.IsRecentOnly)
+                {
+                    this.CheckRecent();
+                }
+                else
+                {
+                    this.CheckPage();
+                }
+            }
+            else
+            {
+                this.IsEmpty = true;
+            }           
+        }
+
+        private void CheckPage()
+        {
             if (Directory.Exists(Config.StatFolderName))
             {
                 if (!this.PrevPageButton.IsEnabled) this.PrevPageButton.IsEnabled = true;
@@ -102,16 +128,21 @@ namespace bayoen.Windows.Contents
             }
         }
 
+        private void CheckRecent()
+        {
+
+        }
+
         private void PrevPageButton_Click(object sender, RoutedEventArgs e)
         {
             this.MatchIndex--;
-            this.CheckMatchDataGrid();
+            this.CheckGrid();
         }
 
         private void NextPageButton_Click(object sender, RoutedEventArgs e)
         {
             this.MatchIndex++;
-            this.CheckMatchDataGrid();
+            this.CheckGrid();
         }
 
         private void DataGrid_LoadingRowDetails(object sender, DataGridRowDetailsEventArgs e)
