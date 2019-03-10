@@ -46,17 +46,6 @@ namespace bayoen.Memory
 
                 this.LobbySize = Core.PPTMemory.LobbySize;
                 this.LobbyMax = Core.PPTMemory.LobbyMax;
-                //if (menuID == 28)
-                //{
-                //    // Freeplay
-                //    this.LobbySize = Core.PPTMemory.LobbySize;
-                //    this.LobbyMax = Core.PPTMemory.LobbyMax;
-                //}
-                //else
-                //{
-                //    // Otherwise (ignore acrade)
-                //    this.LobbySize = this.LobbyMax = -1;
-                //}
                 return true;
             }
 

@@ -20,6 +20,11 @@ namespace bayoen.Data
         [js::JsonProperty(PropertyName = "GameCategory")]
         public PPTGameCategories GameCategory { get; private set; }
 
+        [js::JsonProperty(PropertyName = "MyName")]
+        public string MyName { get; private set; }
+        [js::JsonProperty(PropertyName = "MyID32")]
+        public int MyID32 { get; private set; }
+
         [js::JsonProperty(PropertyName = "MatchBegin")]
         public DateTime MatchBegin { get; private set; }
         [js::JsonProperty(PropertyName = "MatchEnd")]
@@ -58,6 +63,9 @@ namespace bayoen.Data
             // Already Checked!           
             this.GameMode = Core.PPTStatus.GameMode;
             this.GameCategory = this.MainStateToCatergory(Core.PPTStatus.MainState);
+            this.MyName = Core.PPTMemory.MyName;
+            this.MyID32 = Core.PPTMemory.MyID32;
+                       
             this.MatchBegin = DateTime.UtcNow;
             this.MatchEnd = DateTime.MinValue;
             this.MatchCrash = PPTMatchCrashes.None;
@@ -138,12 +146,10 @@ namespace bayoen.Data
             {
                 if (this.MatchEnd.ToLocalTime().Date == DateTime.Today)
                 {
-                    //return "PM 03:42:??";
                     return this.MatchEnd.ToLocalTime().ToString("tt hh:mm:ss", CultureInfo.CreateSpecificCulture("en-US"));
                 }
                 else
                 {
-                    //return "1 Mar 19'";
                     return this.MatchEnd.ToLocalTime().ToString("d MMM yy", CultureInfo.CreateSpecificCulture("en-US"));
                 }                               
             }
@@ -154,7 +160,7 @@ namespace bayoen.Data
         {
             get
             {
-                PlayerInfo myInfo = this.Players.Find(x => x.ID32 == Core.PPTMemory.MySteamID32);
+                PlayerInfo myInfo = this.Players.Find(x => x.ID32 == this.MyID32);
                 if (myInfo == null) return "Not me";
 
                 return myInfo.PlayType.ToString();
@@ -166,7 +172,7 @@ namespace bayoen.Data
         {
             get
             {
-                PlayerInfo opponentInfo = this.Players.Find(x => x.ID32 != Core.PPTMemory.MySteamID32);
+                PlayerInfo opponentInfo = this.Players.Find(x => x.ID32 != this.MyID32);
                 if (opponentInfo == null) return "No opponent";
 
                 return $"{opponentInfo.Name} ({opponentInfo.Rating}, {opponentInfo.PlayType.ToString()})";
@@ -181,7 +187,7 @@ namespace bayoen.Data
                 if (this.MatchCrash != PPTMatchCrashes.None) return "Crashed";
 
                 string gameResults = "";
-                int myLocation = 1 + this.Players.FindIndex(x => x.ID32 == Core.PPTMemory.MySteamID32); // 1 or 2
+                int myLocation = 1 + this.Players.FindIndex(x => x.ID32 == this.MyID32); // 1 or 2
                 foreach (GameRecord game in this.Games)
                 {
                     if (game.Winners.Count == 0)

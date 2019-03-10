@@ -23,28 +23,18 @@ namespace bayoen.Memory
         {            
             if (!Core.PPTStatus.Check()) return;
 
-            this.PuzzleLeagueTick();
+            
 
-            //Core.MainWindow.TextOut.Text = Core.CurrentMatch.ToJSON().ToString();
+            this.PuzzleLeagueTick();          
 
             Core.OldPPTStatus = Core.PPTStatus.Clone() as PPTStatus;
 
-#if DEBUG
+            #if DEBUG
             Core.DebugWindow.TextOut.Text = $"MainState: {Core.PPTStatus.MainState.ToString()}"
                 + $"\nSubState: {(Core.PPTStatus.SubState == PPTSubStates.Empty ? "" : Core.PPTStatus.SubState.ToString())}"
                 + $"\nGameMode: {(Core.PPTStatus.GameMode == PPTGameModes.None ? "" : Core.PPTStatus.GameMode.ToString())}{(Core.PPTStatus.IsEndurance ? " (Endurance)" : "")}"
                 + $"\nMyRating: {Core.PPTMemory.MyRating}";
-#endif
-
-            #region [text dashboard]
-            if (true) // Core.PPTMemory.CheckProcess()
-            {
-                // Do scan PPT
-
-
-
-            }
-            #endregion
+            #endif
         }
 
         private void PuzzleLeagueTick()
@@ -134,7 +124,7 @@ namespace bayoen.Memory
                             }
                             
                             if (!Directory.Exists(Config.StatFolderName)) Directory.CreateDirectory(Config.StatFolderName);
-                            Core.CurrentMatch.Save(Path.Combine(Config.StatFolderName, $"match_s{Core.PPTMemory.MySteamID32}_t{Core.CurrentMatch.MatchBegin.ToString("yyMMdd_hhmmss")}.json"));
+                            Core.CurrentMatch.Save(Path.Combine(Config.StatFolderName, $"match_s{Core.PPTMemory.MyID32}_t{Core.CurrentMatch.MatchBegin.ToString("yyMMdd_hhmmss")}.json"));
 
                             Core.MainWindow.HomeTabGrid.RecentNavigator.CheckGrid();
                         }                        

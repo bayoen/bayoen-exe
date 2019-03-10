@@ -24,6 +24,8 @@ namespace bayoen.Data
         public List<int> Ticks { get; private set; }
         [js::JsonProperty(PropertyName = "PlayerRecords")]
         public List<PlayerRecord> PlayerRecords { get; private set; }
+        [js::JsonIgnore]
+        private int LastFrameTick { get; set; }
 
         public bool Initialize()
         {
@@ -32,8 +34,7 @@ namespace bayoen.Data
             this.GameEnd = DateTime.MinValue;
             this.Ticks = new List<int>();
             this.Winners = new List<int>();
-
-            Core.LastFrameTick = -Config.MinimumFrameTick - 1;
+            this.LastFrameTick = -Config.MinimumFrameTick - 1;
 
             return true;
         }
@@ -42,7 +43,7 @@ namespace bayoen.Data
         {
             if (this.GameBegin != DateTime.MinValue && this.GameEnd == DateTime.MinValue)
             {
-                if (Core.PPTStatus.GameFrame - Core.LastFrameTick > Config.MinimumFrameTick)
+                if (Core.PPTStatus.GameFrame - this.LastFrameTick > Config.MinimumFrameTick)
                 {
                     Core.CurrentGame.Ticks.Add(Core.PPTStatus.GameFrame);
                     for (int playerIndex = 0; playerIndex < this.PlayerRecords.Count; playerIndex++)
@@ -50,7 +51,7 @@ namespace bayoen.Data
                         PlayerRecords[playerIndex].Scores.Add(Core.PPTMemory.PlayerScore(playerIndex));
                     }
 
-                    Core.LastFrameTick = Core.PPTStatus.GameFrame;
+                    this.LastFrameTick = Core.PPTStatus.GameFrame;
                 }
             }
         }

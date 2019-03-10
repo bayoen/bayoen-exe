@@ -41,6 +41,7 @@ namespace bayoen.Windows.Contents
             {
                 this.PagePanel.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
                 this._isRecentOnly = value;
+                this.MatchIndex = -1;
             }
         }
 
@@ -50,19 +51,21 @@ namespace bayoen.Windows.Contents
             get => this._isEmpty;
             set
             {
-                if (this.IsRecentOnly) return;
                 if (this._isEmpty == value) return;
 
-                if (value)
+                if (!this.IsRecentOnly)
                 {
-                    this.PrevPageButton.IsEnabled = false;
-                    this.NextPageButton.IsEnabled = false;
-                    this.PageTextBlock.Text = $"(empty) ";
-                }
-                else
-                {
-                    this.PrevPageButton.IsEnabled = true;
-                    this.NextPageButton.IsEnabled = true;
+                    if (value)
+                    {
+                        this.PrevPageButton.IsEnabled = false;
+                        this.NextPageButton.IsEnabled = false;
+                        this.PageTextBlock.Text = $"(empty) ";
+                    }
+                    else
+                    {
+                        this.PrevPageButton.IsEnabled = true;
+                        this.NextPageButton.IsEnabled = true;
+                    }
                 }
 
                 this._isEmpty = value;
@@ -75,45 +78,27 @@ namespace bayoen.Windows.Contents
 
             if (Directory.Exists(Config.StatFolderName))
             {
-                if (this.IsRecentOnly)
-                {
-                    this.CheckRecent();
-                }
-                else
-                {
-                    this.CheckPage();
-                }
-            }
-            else
-            {
-                this.IsEmpty = true;
-            }           
-        }
-
-        private void CheckPage()
-        {
-            if (Directory.Exists(Config.StatFolderName))
-            {
-                if (!this.PrevPageButton.IsEnabled) this.PrevPageButton.IsEnabled = true;
-                if (!this.NextPageButton.IsEnabled) this.NextPageButton.IsEnabled = true;
-
                 List<string> files = Directory.GetFiles(Config.StatFolderName, "match_*.json").ToList();
-                files.Reverse();
-
                 if (files.Count == 0)
                 {
                     this.IsEmpty = true;
                     return;
                 }
-
-                int pageCount = (int)Math.Ceiling((double)files.Count / (double)Config.MatchMax);
+                files.Reverse();
 
                 int index;
-                if (this.MatchIndex >= pageCount) index = 0;
-                else if (this.MatchIndex < 0) index = pageCount - 1;
-                else index = this.MatchIndex;
-
-                this.PageTextBlock.Text = $"{index + 1}/{pageCount}";
+                if (this.IsRecentOnly)
+                {
+                    index = 0;
+                }
+                else
+                {
+                    int pageCount = (int)Math.Ceiling((double)files.Count / (double)Config.MatchMax);
+                    if (this.MatchIndex >= pageCount) index = this.MatchIndex = 0;
+                    else if (this.MatchIndex < 0) index = this.MatchIndex = pageCount - 1;
+                    else index = this.MatchIndex;
+                    this.PageTextBlock.Text = $"{index + 1}/{pageCount}";
+                }
 
                 int entryBegin = index * Config.MatchMax;
                 int entryEnd = Math.Min(files.Count, (index + 1) * Config.MatchMax) - 1;
@@ -125,12 +110,7 @@ namespace bayoen.Windows.Contents
             else
             {
                 this.IsEmpty = true;
-            }
-        }
-
-        private void CheckRecent()
-        {
-
+            }           
         }
 
         private void PrevPageButton_Click(object sender, RoutedEventArgs e)
@@ -147,7 +127,7 @@ namespace bayoen.Windows.Contents
 
         private void DataGrid_LoadingRowDetails(object sender, DataGridRowDetailsEventArgs e)
         {
-            //e.DetailsElement
+            //e.DetailsElement.
         }
     }
 }

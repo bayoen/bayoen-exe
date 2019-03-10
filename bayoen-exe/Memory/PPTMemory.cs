@@ -66,7 +66,7 @@ namespace bayoen.Memory
         public int LobbyMax => this.ReadInt32(new IntPtr(0x140473760), 0x20, 0xB8);
 
         public string MyName => this.ReadValidString(new IntPtr(0x1405A2010), Config.PlayerNameSize);
-        public int MySteamID32 => this.ReadInt32(new IntPtr(0x1405A2010));
+        public int MyID32 => this.ReadInt32(new IntPtr(0x1405A2010));
         public int MyRating => this.ReadInt16(new IntPtr(0x140599FF0));
         public int MyIndex
         {
@@ -74,7 +74,7 @@ namespace bayoen.Memory
             {
                 int players = LobbySize;
                 if (players < 2) return 0;
-                int steam = MySteamID32;
+                int steam = MyID32;
                 for (int i = 0; i < players; i++)
                     if (steam == PlayerSteamID32(i))
                         return i;
