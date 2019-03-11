@@ -1,0 +1,32 @@
+﻿<Grid x:Class="bayoen.Windows.Layouts.LongStarPanel"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:bayoen.Windows.Layouts"
+      Height="68" Width="384" Opacity="0.9">
+
+    <Grid.Resources>
+        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MetroTextBlock}">
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="FontWeight" Value="ExtraBold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="8"/>
+        </Style>
+    </Grid.Resources>
+    
+    <Image x:Name="PanelImage"
+           Height="68" Width="384"/>
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        <TextBlock x:Name="PanelHeaderTextBlock"               
+               Margin="20,8,4,8"
+               Text="Today's Stats:"/>
+        <TextBlock x:Name="WinTextBlock" Text="###"/>
+        <Image x:Name="WinImage"
+               Height="32" Width="36" Margin="0,3,0,0"/>
+        <TextBlock x:Name="LoseTextBlock" Text="###"/>
+        <Image x:Name="LoseImage"
+               Height="32" Width="36" Margin="0,3,0,0"/>
+    </StackPanel>
+
+</Grid>

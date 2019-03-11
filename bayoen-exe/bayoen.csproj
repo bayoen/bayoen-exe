@@ -133,8 +133,16 @@
     <Compile Include="Utility\ExternalMethods\System.Drawing.Bitmap.cs" />
     <Compile Include="Utility\ExternalMethods\System.Drawing.Icon.cs" />
     <Compile Include="Utility\ExternalMethods\System.IntPtr.cs" />
-    <Compile Include="Utility\Gdi32.dll.cs" />
-    <Compile Include="Utility\User32.dll.cs" />
+    <Compile Include="Utility\ExternalMethods\System.Windows.Controls.Image.cs" />
+    <Compile Include="Utility\Win32\Gdi32.dll.cs" />
+    <Compile Include="Utility\Win32\GWL.cs" />
+    <Compile Include="Utility\Win32\RECT.cs" />
+    <Compile Include="Utility\Win32\User32.dll.cs" />
+    <Compile Include="Utility\Win32\WindowStatus.cs" />
+    <Compile Include="Utility\Win32\WS.cs" />
+    <Compile Include="Windows\CapturableWindow.xaml.cs">
+      <DependentUpon>CapturableWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Contents\MatchViewerGrid.xaml.cs">
       <DependentUpon>MatchViewerGrid.xaml</DependentUpon>
     </Compile>
@@ -154,9 +162,16 @@
     <Compile Include="Windows\Contents\MatchScorePlotGrid.xaml.cs">
       <DependentUpon>MatchScorePlotGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\FloatingWindow.xaml.cs">
+      <DependentUpon>FloatingWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Layouts\ColumnGridSplitter.xaml.cs">
       <DependentUpon>ColumnGridSplitter.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Layouts\LongStarPanel.xaml.cs">
+      <DependentUpon>LongStarPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Layouts\OverlayWindow.cs" />
     <Compile Include="Windows\Layouts\RowGridSplitter.xaml.cs">
       <DependentUpon>RowGridSplitter.xaml</DependentUpon>
     </Compile>
@@ -179,6 +194,10 @@
     <Compile Include="Windows\Layouts\TabNavigatorListView.xaml.cs">
       <DependentUpon>TabNavigatorListView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Windows\CapturableWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Contents\MatchViewerGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -187,7 +206,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\FloatingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Layouts\ColumnGridSplitter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Layouts\LongStarPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -285,7 +312,15 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\Component.LongStarPanel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Component.LongStarPanel.Lose.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Component.LongStarPanel.Win.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

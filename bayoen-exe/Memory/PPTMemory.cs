@@ -1,6 +1,7 @@
 ﻿using bayoen.Data;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,11 @@ namespace bayoen.Memory
         public int WinCount => this.ReadInt32(this._scoreAddress + 0x10);
         public int WinCountForced => this.ReadInt32(this.ScoreAddress + 0x10);
 
+        public Process[] GetProcesses()
+        {
+            return Process.GetProcessesByName(this.processName);
+        }
+
         public int PlayerSteamID32(int index) => this.ReadInt32(this._playerAddress + index * 0x50 + 0x40);
         public int PlayerSteamID32Forced(int index) => this.ReadInt32(this.PlayerAddress + index * 0x50 + 0x40);
 
@@ -37,9 +43,7 @@ namespace bayoen.Memory
         public string PlayerNameForced(int index) => this.ReadValidString(this.PlayerAddress + index * 0x50, Config.PlayerNameSize);
         public string PlayerNameDirect(int index) => this.ReadValidString(new IntPtr(0x140598BD4 + index * 0x68), Config.PlayerNameSize);
 
-        public string PlayerNameRaw(int index) => this.ReadStringUnicode(this._playerAddress + index * 0x50, Config.PlayerNameSize);
-        
-        //public PPTPlayTypes PlayType
+        public string PlayerNameRaw(int index) => this.ReadStringUnicode(this._playerAddress + index * 0x50, Config.PlayerNameSize);       
 
         public int PlayerRating(int index) => this.ReadInt16(new IntPtr(0x140473760), 0x20, index * 0x50 + 0x108);
 

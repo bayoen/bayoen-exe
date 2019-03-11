@@ -61,6 +61,26 @@ namespace bayoen.Properties {
         }
         
         /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap cpn_lose {
+            get {
+                object obj = ResourceManager.GetObject("cpn_lose", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap cpn_win {
+            get {
+                object obj = ResourceManager.GetObject("cpn_win", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   (아이콘)과(와) 유사한 System.Drawing.Icon 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
         internal static System.Drawing.Icon ico_kirby_star_allies {
@@ -76,6 +96,16 @@ namespace bayoen.Properties {
         internal static System.Drawing.Bitmap img_wallpaper {
             get {
                 object obj = ResourceManager.GetObject("img_wallpaper", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap pnl_longstar {
+            get {
+                object obj = ResourceManager.GetObject("pnl_longstar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

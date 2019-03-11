@@ -7,7 +7,7 @@
             xmlns:layout="clr-namespace:bayoen.Windows.Layouts"
             xmlns:content="clr-namespace:bayoen.Windows.Contents">
     <Grid>
-        <ProgressBar x:Name="IndeterminateBar" Height="28" BorderThickness="0" IsIndeterminate="True" Opacity="0.5" VerticalAlignment="Center" Visibility="Collapsed"/>
+        <ProgressBar x:Name="IndeterminateBar" Height="28" BorderThickness="0" IsIndeterminate="True" Opacity="0.5" VerticalAlignment="Center" />
         <mtc:MetroProgressBar x:Name="StatusBar" Height="28" BorderThickness="0" Opacity="0.5" Value="100" VerticalAlignment="Center"/>
         <TextBlock x:Name="StatusTextBlock" Foreground="White" VerticalAlignment="Center" Padding="8,0,8,2" FontSize="14"/>
         <TextBlock x:Name="VersionTextBlock" Foreground="LightGray" VerticalAlignment="Center" Padding="8,0,8,2" FontSize="14" HorizontalAlignment="Right"/>

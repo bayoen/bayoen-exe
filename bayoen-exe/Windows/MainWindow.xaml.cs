@@ -35,18 +35,50 @@ namespace bayoen.Windows
                 Stretch = Stretch.UniformToFill,
             };
 
-            this.HomeTabGrid.RecentNavigator.CheckGrid();
+            this.SetVersion($"{Config.ProjectName} v{Config.ProjectVersion.ToString()}");
+            this.Status("Ready");
+
+            this.HomeTabGrid.RecentNavigator.CheckGrid();            
         }
 
-        private void Dashboard_Closing(object sender, CancelEventArgs e)
+        public void Status(string s)
         {
-            e.Cancel = true;
-            this.Hide();
+            this.Status(s, false);
+        }
+        public void Status(string s, bool indeterminate)
+        {
+            this.Status(s, 1000, 1000, indeterminate); // ###.#% resolution
+        }
+        public void Status(string s, double percent)
+        {
+            this.Status(s, 1000*percent, 1000, false);
+        }
+        public void Status(string s, double value, double max)
+        {
+            this.Status(s, value, max, false);
+        }
+        public void Status(string s, double value, double max, bool indeterminate)
+        {
+            this.StatusBorder.StatusTextBlock.Text = s;
+
+            if (indeterminate)
+            {
+                this.StatusBorder.StatusBar.Visibility = Visibility.Collapsed;
+                this.StatusBorder.IndeterminateBar.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                this.StatusBorder.StatusBar.Visibility = Visibility.Visible;
+                this.StatusBorder.IndeterminateBar.Visibility = Visibility.Collapsed;
+
+                this.StatusBorder.StatusBar.Value = value;
+                this.StatusBorder.StatusBar.Maximum = max;
+            }
         }
 
-        private void Dashboard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void SetVersion(string s)
         {
-            this.DragMove();
+            this.StatusBorder.VersionTextBlock.Text = s;
         }
     }
 }

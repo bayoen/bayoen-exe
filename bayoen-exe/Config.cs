@@ -13,6 +13,8 @@ namespace bayoen
     {
         public static readonly string ProjectName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
 
+        public static readonly Version ProjectVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+
         public static readonly string PPTName = "puyopuyotetris";
 
         public static readonly string StatFolderName = "stats";

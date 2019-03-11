@@ -5,6 +5,8 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
+using bayoen.Utility.Win32;
+
 namespace bayoen.Utility.ExternalMethods
 {
     public static partial class ExtendedMethods

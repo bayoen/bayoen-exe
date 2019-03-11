@@ -1,4 +1,4 @@
-﻿<mtc:MetroWindow x:Name="Dashboard"
+﻿<mtc:MetroWindow x:Name="TopWindow"
                  x:Class="bayoen.Windows.MainWindow"
                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -13,8 +13,8 @@
                  WindowTitleBrush="Transparent"
                  ShowIconOnTitleBar="False"
                  BorderThickness="1"
-                 MouseLeftButtonDown="Dashboard_MouseLeftButtonDown"
-                 Closing="Dashboard_Closing">
+                 MouseLeftButtonDown="MainWindow_MouseLeftButtonDown"
+                 Closing="MainWindow_Closing">
 
     <Grid>
         <Grid.RowDefinitions>

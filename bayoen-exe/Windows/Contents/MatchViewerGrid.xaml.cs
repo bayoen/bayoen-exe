@@ -110,7 +110,7 @@ namespace bayoen.Windows.Contents
             else
             {
                 this.IsEmpty = true;
-            }           
+            }
         }
 
         private void PrevPageButton_Click(object sender, RoutedEventArgs e)

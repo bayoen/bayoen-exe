@@ -20,6 +20,17 @@ namespace bayoen.Windows
 {
     public partial class MainWindow
     {
+        private void MainWindow_Closing(object sender, CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+
+        private void MainWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+
         private void NavigatorListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 

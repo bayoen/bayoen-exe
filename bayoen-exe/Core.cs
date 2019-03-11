@@ -42,6 +42,9 @@ namespace bayoen
         private static GameRecord _currentGame;
         public static GameRecord CurrentGame => _currentGame ?? (_currentGame = new GameRecord());
 
+        private static FloatingWindow _floatingWindow;
+        public static FloatingWindow FloatingWindow => _floatingWindow ?? (_floatingWindow = new FloatingWindow());
+
         #endregion
 
         public static void Initialize()
@@ -57,6 +60,7 @@ namespace bayoen
             OldPPTStatus.Check();
 
             PPTTimer.Start();
+
         }
     }
 }

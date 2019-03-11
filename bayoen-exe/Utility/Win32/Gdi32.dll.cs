@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace bayoen.Utility
+namespace bayoen.Utility.Win32
 {
     public class Gdi32
     {

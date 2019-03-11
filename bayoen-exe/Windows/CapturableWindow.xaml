@@ -1,0 +1,11 @@
+﻿<layout:OverlayWindow x:Class="bayoen.Windows.CapturableWindow"                      
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:mtc="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:layout="clr-namespace:bayoen.Windows.Layouts"
+                      xmlns:content="clr-namespace:bayoen.Windows.Contents"
+                      IsCapturable="True">
+    <Grid>
+        
+    </Grid>
+</layout:OverlayWindow>
