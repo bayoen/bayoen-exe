@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 using op = OxyPlot;
 
-namespace bayoen.Windows.Contents
+namespace bayoen.Windows.Layouts
 {
     public partial class MatchScorePlotGrid : Grid
     {

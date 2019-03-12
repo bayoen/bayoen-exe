@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using js = Newtonsoft.Json;
 using jl = Newtonsoft.Json.Linq;
+using bayoen.Data.Enums;
 
 namespace bayoen.Data
 {
@@ -29,7 +30,7 @@ namespace bayoen.Data
         //[js::JsonProperty(PropertyName = "PlayStyle")]
         //public int PlayStyle { get; private set; }
         [js::JsonProperty(PropertyName = "PlayType")]
-        public PPTPlayTypes PlayType { get; private set; }
+        public PlayTypes PlayType { get; private set; }
 
         public PlayerInfo() { }
 
@@ -41,7 +42,7 @@ namespace bayoen.Data
             this.Name = Core.PPTMemory.PlayerNameForced(index);
             this.NameRaw = Core.PPTMemory.PlayerNameRaw(index);
             this.Rating = Core.PPTMemory.PlayerRating(index);
-            this.PlayType = Core.PPTMemory.PlayType(index) ? PPTPlayTypes.Tetris : PPTPlayTypes.PuyoPuyo;
+            this.PlayType = Core.PPTMemory.PlayType(index) ? PlayTypes.Tetris : PlayTypes.PuyoPuyo;
 
             return true;
         }

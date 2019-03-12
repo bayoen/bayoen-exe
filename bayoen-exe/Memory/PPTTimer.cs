@@ -9,6 +9,7 @@ using System.Windows.Threading;
 
 using bayoen;
 using bayoen.Data;
+using bayoen.Data.Enums;
 
 namespace bayoen.Memory
 {
@@ -24,54 +25,58 @@ namespace bayoen.Memory
         {            
             if (Core.PPTStatus.Check())
             {
-                if (Core.FloatingWindow.Visibility != Visibility.Visible)
-                {
-                    Core.FloatingWindow.Show();
-                }
-                else
-                {
-                    Core.FloatingWindow.Check();
-                }
-                
                 switch (Core.PPTStatus.MainState)
                 {
-                    case PPTMainStates.PuzzleLeague:
+                    case MainStates.PuzzleLeague:
                         this.PuzzleLeagueTick();
                         break;
                 }
+
+                Core.FloatingWindow.IsClosed = false;
+                Core.FloatingWindow.Check();
+                Core.MainWindow.Status("Ready");
             }
             else
             {
-
+                Core.FloatingWindow.IsClosed = true;
+                Core.MainWindow.Status("Offline");
             }
 
             
-            Core.OldPPTStatus = Core.PPTStatus.Clone() as PPTStatus;            
+            Core.OldPPTStatus = Core.PPTStatus.Clone() as PPTStatus;
 
             #if DEBUG
-            Core.DebugWindow.TextOut.Text = $"MainState: {Core.PPTStatus.MainState.ToString()}"
-                + $"\nSubState: {(Core.PPTStatus.SubState == PPTSubStates.Empty ? "" : Core.PPTStatus.SubState.ToString())}"
-                + $"\nGameMode: {(Core.PPTStatus.GameMode == PPTGameModes.None ? "" : Core.PPTStatus.GameMode.ToString())}{(Core.PPTStatus.IsEndurance ? " (Endurance)" : "")}"
-                + $"\nMyRating: {Core.PPTMemory.MyRating}";
+            DebugTick();
             #endif
+        }
+
+        private void DebugTick()
+        {
+            //Core.DebugWindow.TextOut.Text = Core.CurrentMatch.ToJSON().ToString();
+
+            Core.DebugWindow.TextOut.Text = $"MainState: {Core.PPTStatus.MainState.ToString()}"
+                                            + $"\nSubState: {(Core.PPTStatus.SubState == SubStates.Empty ? "" : Core.PPTStatus.SubState.ToString())}"
+                                            + $"\nGameMode: {(Core.PPTStatus.GameMode == GameModes.None ? "" : Core.PPTStatus.GameMode.ToString())}{(Core.PPTStatus.IsEndurance ? " (Endurance)" : "")}"
+                                            + $"\nMyRating: {Core.PPTMemory.MyRating}"
+                                            + $"\nGameFinished: {Core.PPTMemory.IsGameFinished}";
         }
 
         private void PuzzleLeagueTick()
         {
-            if (Core.PPTStatus.SubState == PPTSubStates.InMatch)
+            if (Core.PPTStatus.SubState == SubStates.InMatch)
             {
-                if (Core.OldPPTStatus.SubState == PPTSubStates.CharacterSelection)
+                if (Core.OldPPTStatus.SubState == SubStates.CharacterSelection)
                 {
                     // New match
                     Core.CurrentMatch.Initialize();
                 }
-                else if (Core.OldPPTStatus.SubState == PPTSubStates.InMatch)
+                else if (Core.OldPPTStatus.SubState == SubStates.InMatch)
                 {
                     // In match
                     if ((Core.PPTStatus.GameFrame > 0 && Core.OldPPTStatus.GameFrame == 0) // 0 -> 1 game
                         || (Core.PPTStatus.GameFrame < Core.OldPPTStatus.GameFrame)) // n-1 -> n game
                     {
-                        #region [ Draw game and save it ]
+                        #region [ Drow game and save it ]
                         // Save draw game (post processing)
                         if (Core.CurrentGame.GameEnd != DateTime.MinValue && Core.CurrentGame.Winners.Count == 0)
                         {
@@ -90,7 +95,7 @@ namespace bayoen.Memory
                     // record ticks
                     Core.CurrentGame.CheckTickScores();
 
-                    if (Core.PPTStatus.PuzzleLeagueGameFinishFlag && !Core.OldPPTStatus.PuzzleLeagueGameFinishFlag)
+                    if (Core.PPTStatus.IsGameFinished && !Core.OldPPTStatus.IsGameFinished)
                     {
                         if (Core.OldPPTStatus.GameFrame > 0 && Core.CurrentGame.GameEnd == DateTime.MinValue)
                         {
@@ -141,7 +146,8 @@ namespace bayoen.Memory
                         }
 
                         if (!Directory.Exists(Config.StatFolderName)) Directory.CreateDirectory(Config.StatFolderName);
-                        Core.CurrentMatch.Save(Path.Combine(Config.StatFolderName, $"match_s{Core.PPTMemory.MyID32}_t{Core.CurrentMatch.MatchBegin.ToString("yyMMdd_hhmmss")}.json"));
+                        string matchFileName = $"match_s{Core.PPTMemory.MyID32}_t{Core.CurrentMatch.MatchBegin.ToUniversalTime().ToString("yyMMdd_HHmmss")}.json";
+                        Core.CurrentMatch.Save(Path.Combine(Config.StatFolderName, matchFileName));
 
                         Core.FloatingWindow.PuzzleLeagueResultPanel.CheckScore();
                         Core.MainWindow.HomeTabGrid.RecentNavigator.CheckGrid();
@@ -149,5 +155,7 @@ namespace bayoen.Memory
                 }
             }
         }
+
+
     }
 }

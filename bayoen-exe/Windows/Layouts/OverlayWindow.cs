@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
 
-using bayoen.Data;
-using bayoen.Utility;
 using bayoen.Utility.Win32;
 
 using mtc = MahApps.Metro.Controls;
@@ -18,21 +11,39 @@ namespace bayoen.Windows.Layouts
     {
         public bool IsCapturable { get; set; }
 
+        private bool _isClosed;
+        public bool IsClosed
+        {
+            get => this._isClosed;
+            set
+            {
+                if (this._isClosed == value) return;
+
+                if (value)
+                {
+                    this.Hide();
+                }
+                else
+                {
+                    this.Show();
+                }
+
+                this._isClosed = value;
+            }
+        }
+
         public OverlayWindow()
         {
             this.BorderThickness = new System.Windows.Thickness(0);
             this.ShowTitleBar = false;
             this.TitleBarHeight = 0;
+
+            this._isClosed = true;
         }
 
-        public void Check()
+        public WindowStatus CheckPPTStatus()
         {
-            this.UpdateLocation(this.CheckPPTRect(), this.CheckPPTStatus());
-        }
-
-        private WindowStatus CheckPPTStatus()
-        {
-            int currentWindowStyle = User32.GetWindowLong(Core.PPTMemory.GetProcesses().Single().MainWindowHandle, (int)GWL.GWL_STYLE);
+            int currentWindowStyle = User32.GetWindowLong(Core.PPTMemory.Process.MainWindowHandle, (int)GWL.GWL_STYLE);
 
             if ((currentWindowStyle & (uint)WS.WS_MINIMIZE) == (uint)WS.WS_MINIMIZE)
             {
@@ -42,7 +53,7 @@ namespace bayoen.Windows.Layouts
             {
                 return WindowStatus.Maximized;
             }
-            else if (User32.GetForegroundWindow() == Core.PPTMemory.GetProcesses().Single().MainWindowHandle)
+            else if (User32.GetForegroundWindow() == Core.PPTMemory.Process.MainWindowHandle)
             {
                 return WindowStatus.Focused;
             }
@@ -52,10 +63,10 @@ namespace bayoen.Windows.Layouts
             }
         }
 
-        private RECT CheckPPTRect()
+        public RECT CheckPPTRect()
         {
             RECT pptRect = new RECT();
-            User32.GetWindowRect(Core.PPTMemory.GetProcesses().Single().MainWindowHandle, ref pptRect);
+            User32.GetWindowRect(Core.PPTMemory.Process.MainWindowHandle, ref pptRect);
             return pptRect;
         }
 

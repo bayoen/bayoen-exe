@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using bayoen.Data;
+using bayoen.Data.Enums;
 
 namespace bayoen.Memory
 {
@@ -15,9 +16,9 @@ namespace bayoen.Memory
             
         }
 
-        public PPTMainStates MainState { get; private set; }
-        public PPTSubStates SubState { get; private set; }
-        public PPTGameModes GameMode { get; private set; }
+        public MainStates MainState { get; private set; }
+        public SubStates SubState { get; private set; }
+        public GameModes GameMode { get; private set; }
         public bool IsEndurance { get; private set; }
         public int LobbySize { get; private set; }
         public int LobbyMax { get; private set; }
@@ -28,13 +29,13 @@ namespace bayoen.Memory
 
         public List<int> PlayerStars { get; private set; }
 
-        public bool PuzzleLeagueGameFinishFlag { get; private set; }
+        public bool IsGameFinished { get; private set; }
 
         public bool Check()
         {
-            if (!Core.PPTMemory.CheckProcess())
+            if (!Core.PPTMemory.Check())
             {
-                this.MainState = PPTMainStates.Offline;
+                this.MainState = MainStates.Offline;
                 return false;
             }
 
@@ -51,23 +52,23 @@ namespace bayoen.Memory
 
             if (Core.PPTMemory.InAdventure)
             {
-                this.MainState = PPTMainStates.Adventure;
-                this.SubState = PPTSubStates.Empty;
+                this.MainState = MainStates.Adventure;
+                this.SubState = SubStates.Empty;
                 return true;
             }
 
             if (Core.PPTMemory.InInitial)
             {
-                this.MainState = PPTMainStates.Title;
-                this.SubState = PPTSubStates.Empty;
+                this.MainState = MainStates.Title;
+                this.SubState = SubStates.Empty;
                 return true;
             }
 
             if (Core.PPTMemory.InOnlineReplay)
             {
-                if (Core.PPTMemory.InLocalReplay) this.MainState = PPTMainStates.LocalReplay;
-                else this.MainState = PPTMainStates.OnlineReplay;
-                this.SubState = PPTSubStates.Empty;
+                if (Core.PPTMemory.InLocalReplay) this.MainState = MainStates.LocalReplay;
+                else this.MainState = MainStates.OnlineReplay;
+                this.SubState = SubStates.Empty;
                 return true;
             }
 
@@ -79,22 +80,22 @@ namespace bayoen.Memory
 
             if (Core.PPTMemory.InCharacterSelection)
             {
-                this.SubState = PPTSubStates.CharacterSelection;
+                this.SubState = SubStates.CharacterSelection;
                 return true;
             }
 
             if (Core.PPTMemory.InReady)
             {
-                this.SubState = PPTSubStates.InReady;
+                this.SubState = SubStates.InReady;
                 return true;
             }
             
             if (Core.PPTMemory.InMatch)
             {
-                this.SubState = PPTSubStates.InMatch;
+                this.SubState = SubStates.InMatch;
                 this.GameFrame = Core.PPTMemory.GameFrame;
                 this.SceneFrame = Core.PPTMemory.SceneFrame;
-                this.PuzzleLeagueGameFinishFlag = Core.PPTMemory.PuzzleLeagueGameFinishFlag;
+                this.IsGameFinished = Core.PPTMemory.IsGameFinished;
                 this.PlayerStars = Core.PPTMemory.PlayerStars;
                 this.MyRating = Core.PPTMemory.MyRating;
 
@@ -109,117 +110,117 @@ namespace bayoen.Memory
             return this.MemberwiseClone();
         }
 
-        private static PPTMainStates GetMainState(int id)
+        private static MainStates GetMainState(int id)
         {
             switch (id)
             {
                 case 0:
-                case 12: return PPTMainStates.Loading;
-                case 1: return PPTMainStates.MainMenu;
-                case 2: return PPTMainStates.Adventure;
+                case 12: return MainStates.Loading;
+                case 1: return MainStates.MainMenu;
+                case 2: return MainStates.Adventure;
                 case 3:
-                case 18: return PPTMainStates.SoloArcade;
-                case 4: return PPTMainStates.MultiArcade;
+                case 18: return MainStates.SoloArcade;
+                case 4: return MainStates.MultiArcade;
                 case 5:
                 case 6:
                 case 7:
                 case 8:
-                case 9: return PPTMainStates.Option;
+                case 9: return MainStates.Option;
                 case 10:
                 case 32:
                 case 33:
-                case 37: return PPTMainStates.Online;
-                case 11: return PPTMainStates.Lessons;
+                case 37: return MainStates.Online;
+                case 11: return MainStates.Lessons;
                 case 13:
                 case 14:
                 case 15:
                 case 16:
                 case 17:
-                case 19: return PPTMainStates.CharacterSetection;
+                case 19: return MainStates.CharacterSetection;
                 case 20:
                 case 25:
                 case 27:
-                case 34: return PPTMainStates.PuzzleLeague;
+                case 34: return MainStates.PuzzleLeague;
                 case 21:
                 case 23:
                 case 24:
                 case 26:
-                case 28: return PPTMainStates.FreePlay;
+                case 28: return MainStates.FreePlay;
 
             }
-            return PPTMainStates.Invalid;
+            return MainStates.Invalid;
         }
 
-        private static PPTMainStates GetMainStateFromFlag(int id)
+        private static MainStates GetMainStateFromFlag(int id)
         {
             switch (id)
             {
-                case 0: return PPTMainStates.Adventure;
-                case 1: return PPTMainStates.SoloArcade;
-                case 2: return PPTMainStates.MultiArcade;
-                case 3: return PPTMainStates.Option;
+                case 0: return MainStates.Adventure;
+                case 1: return MainStates.SoloArcade;
+                case 2: return MainStates.MultiArcade;
+                case 3: return MainStates.Option;
                 case 4:
                     switch (Core.PPTMemory.OnlineType)
                     {
-                        case 0: return PPTMainStates.PuzzleLeague;
-                        case 1: return PPTMainStates.FreePlay;
-                        default: return PPTMainStates.None;
+                        case 0: return MainStates.PuzzleLeague;
+                        case 1: return MainStates.FreePlay;
+                        default: return MainStates.None;
                     }                    
-                case 5: return PPTMainStates.Lessons;
+                case 5: return MainStates.Lessons;
             }
-            return PPTMainStates.None;
+            return MainStates.None;
         }
 
-        private static PPTSubStates GetSubState(int id)
+        private static SubStates GetSubState(int id)
         {
             switch (id)
             {
                 case 3:
                 case 4:
-                case 23: return PPTSubStates.ModeSelect;
-                case 6: return PPTSubStates.Stats;
-                case 7: return PPTSubStates.Options;
-                case 8: return PPTSubStates.Theatre;
-                case 9: return PPTSubStates.Shop;
-                case 18: return PPTSubStates.ChallengeModeSelection;
-                case 20: return PPTSubStates.Standby;
-                case 21: return PPTSubStates.RoomSelection;
-                case 24: return PPTSubStates.RoomCreation;
+                case 23: return SubStates.ModeSelect;
+                case 6: return SubStates.Stats;
+                case 7: return SubStates.Options;
+                case 8: return SubStates.Theatre;
+                case 9: return SubStates.Shop;
+                case 18: return SubStates.ChallengeModeSelection;
+                case 20: return SubStates.Standby;
+                case 21: return SubStates.RoomSelection;
+                case 24: return SubStates.RoomCreation;
                 case 25:
-                case 27: return PPTSubStates.Matchmaking;
+                case 27: return SubStates.Matchmaking;
                 case 26:
-                case 28: return PPTSubStates.InLobby;
-                case 32: return PPTSubStates.Replays;
+                case 28: return SubStates.InLobby;
+                case 32: return SubStates.Replays;
                 case 33:
-                case 37: return PPTSubStates.ReplayUpload;
-                case 34: return PPTSubStates.Rankings;
+                case 37: return SubStates.ReplayUpload;
+                case 34: return SubStates.Rankings;
             }
-            return PPTSubStates.Empty;
+            return SubStates.Empty;
         }
 
-        private static PPTGameModes GetGameMode(int id)
+        private static GameModes GetGameMode(int id)
         {
             switch (id)
             {
                 case 0:
-                case 5: return PPTGameModes.Versus;
+                case 5: return GameModes.Versus;
                 case 1:
-                case 6: return PPTGameModes.Fusion;
+                case 6: return GameModes.Fusion;
                 case 2:
-                case 7: return PPTGameModes.Swap;
+                case 7: return GameModes.Swap;
                 case 3:
-                case 8: return PPTGameModes.Party;
+                case 8: return GameModes.Party;
                 case 4:
-                case 9: return PPTGameModes.BigBang;                
-                case 10: return PPTGameModes.EndlessFever;
-                case 11: return PPTGameModes.TinyPuyo;
-                case 12: return PPTGameModes.EndlessPuyo;
-                case 13: return PPTGameModes.Sprint;
-                case 14: return PPTGameModes.Marathon;
-                case 15: return PPTGameModes.Ultra;
+                case 9: return GameModes.BigBang;                
+                case 10: return GameModes.EndlessFever;
+                case 11: return GameModes.TinyPuyo;
+                case 12: return GameModes.EndlessPuyo;
+                case 13: return GameModes.Sprint;
+                case 14: return GameModes.Marathon;
+                case 15: return GameModes.Ultra;
             }
 
-            return PPTGameModes.None;
+            return GameModes.None;
         }
 
         private static bool IsEnduranceGame(int id)

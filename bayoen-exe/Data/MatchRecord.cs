@@ -9,6 +9,7 @@ using bayoen.Memory;
 using js = Newtonsoft.Json;
 using jl = Newtonsoft.Json.Linq;
 using System.Globalization;
+using bayoen.Data.Enums;
 
 namespace bayoen.Data
 {
@@ -16,9 +17,9 @@ namespace bayoen.Data
     {
         //public string MatchID { get; private set; }
         [js::JsonProperty(PropertyName = "GameMode")]
-        public PPTGameModes GameMode { get; private set; }
+        public GameModes GameMode { get; private set; }
         [js::JsonProperty(PropertyName = "GameCategory")]
-        public PPTGameCategories GameCategory { get; private set; }
+        public GameCategories GameCategory { get; private set; }
 
         [js::JsonProperty(PropertyName = "MyName")]
         public string MyName { get; private set; }
@@ -31,7 +32,7 @@ namespace bayoen.Data
         public DateTime MatchEnd { get; private set; }
 
         [js::JsonProperty(PropertyName = "MatchCrash")]
-        public PPTMatchCrashes MatchCrash { get; private set; }
+        public MatchCrashes MatchCrash { get; private set; }
 
         [js::JsonProperty(PropertyName = "LobbyMax")]
         public int LobbyMax { get; private set; }
@@ -68,7 +69,7 @@ namespace bayoen.Data
                        
             this.MatchBegin = DateTime.UtcNow;
             this.MatchEnd = DateTime.MinValue;
-            this.MatchCrash = PPTMatchCrashes.None;
+            this.MatchCrash = MatchCrashes.None;
 
             this.LobbyMax = Core.PPTStatus.LobbyMax;
             this.LobbySize = Core.PPTStatus.LobbySize;
@@ -118,16 +119,16 @@ namespace bayoen.Data
 
         public void Crashed()
         {
-            this.MatchCrash = PPTMatchCrashes.NotMe;
+            this.MatchCrash = MatchCrashes.NotMe;
         }
 
-        private PPTGameCategories MainStateToCatergory(PPTMainStates state)
+        private GameCategories MainStateToCatergory(MainStates state)
         {
-            List<PPTGameCategories> categories = Enum.GetValues(typeof(PPTGameCategories)).Cast<PPTGameCategories>().ToList();
+            List<GameCategories> categories = Enum.GetValues(typeof(GameCategories)).Cast<GameCategories>().ToList();
             int matchedIndex = categories.FindIndex(x => x.ToString() == state.ToString());
             if (matchedIndex < 0)
             {
-                throw new InvalidOperationException($"Wrong PPTGameCategories cast from PPTMainStates.{state.ToString()}");
+                throw new InvalidOperationException($"Wrong PPTGameCategories cast from MainStates.{state.ToString()}");
             }
 
             return categories[matchedIndex];
@@ -184,7 +185,7 @@ namespace bayoen.Data
         {
             get
             {
-                if (this.MatchCrash != PPTMatchCrashes.None) return "Crashed";
+                if (this.MatchCrash != MatchCrashes.None) return "Crashed";
 
                 string gameResults = "";
                 int myLocation = 1 + this.Players.FindIndex(x => x.ID32 == this.MyID32); // 1 or 2

@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-
-using bayoen.Utility;
 using bayoen.Utility.Win32;
 using bayoen.Windows.Layouts;
 
@@ -27,11 +15,25 @@ namespace bayoen.Windows
             this.PuzzleLeagueResultPanel.CheckScore();
         }
 
+        public void Check()
+        {
+            this.UpdateLocation(this.CheckPPTRect(), this.CheckPPTStatus());
+
+            if (Core.PPTStatus.MainState == Data.Enums.MainStates.PuzzleLeague)
+            {
+                this.PuzzleLeagueResultPanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                this.PuzzleLeagueResultPanel.Visibility = Visibility.Collapsed;
+            }
+        }
+
         private void OverlayWindow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (Core.PPTMemory.CheckProcess())
+            if (Core.PPTMemory.Check())
             {
-                User32.SetForegroundWindow(Core.PPTMemory.GetProcesses().Single().MainWindowHandle);
+                User32.SetForegroundWindow(Core.PPTMemory.Process.MainWindowHandle);
             }
         }
     }

@@ -4,7 +4,6 @@
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
               xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
               xmlns:layout="clr-namespace:bayoen.Windows.Layouts"
-              xmlns:content="clr-namespace:bayoen.Windows.Contents"
               IsEnabled="False" Opacity="0.9"
               VerticalAlignment="Stretch" HorizontalAlignment="Center">
 

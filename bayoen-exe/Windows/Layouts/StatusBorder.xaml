@@ -4,8 +4,7 @@
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
             xmlns:mtc="http://metro.mahapps.com/winfx/xaml/controls"
-            xmlns:layout="clr-namespace:bayoen.Windows.Layouts"
-            xmlns:content="clr-namespace:bayoen.Windows.Contents">
+            xmlns:layout="clr-namespace:bayoen.Windows.Layouts">
     <Grid>
         <ProgressBar x:Name="IndeterminateBar" Height="28" BorderThickness="0" IsIndeterminate="True" Opacity="0.5" VerticalAlignment="Center" />
         <mtc:MetroProgressBar x:Name="StatusBar" Height="28" BorderThickness="0" Opacity="0.5" Value="100" VerticalAlignment="Center"/>

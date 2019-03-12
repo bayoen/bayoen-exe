@@ -198,6 +198,9 @@ PublishScripts/
 *.nuget.props
 *.nuget.targets
 
+# Photoshop
+*.psd
+
 # Microsoft Azure Build Output
 csx/
 *.build.csdef

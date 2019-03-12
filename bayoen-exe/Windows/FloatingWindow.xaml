@@ -3,7 +3,6 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:mtc="http://metro.mahapps.com/winfx/xaml/controls"
                       xmlns:layout="clr-namespace:bayoen.Windows.Layouts"
-                      xmlns:content="clr-namespace:bayoen.Windows.Contents"
                       Background="{x:Null}" AllowsTransparency="True"
                       IsWindowDraggable="False" ShowInTaskbar="False"
                       WindowStyle="None" Topmost="True" ResizeMode="NoResize"
@@ -11,6 +10,6 @@
                       Title="bayoen-floating-window"
                       PreviewMouseDown="OverlayWindow_PreviewMouseDown">
     <Grid>
-        <layout:LongStarPanel x:Name="PuzzleLeagueResultPanel" Margin="430,15,5,5" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <layout:LongStarPanel x:Name="PuzzleLeagueResultPanel" Margin="350,5,5,5" VerticalAlignment="Top" HorizontalAlignment="Left"/>
     </Grid>
 </layout:OverlayWindow>

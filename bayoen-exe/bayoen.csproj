@@ -129,7 +129,15 @@
     </ApplicationDefinition>
     <Compile Include="Config.cs" />
     <Compile Include="Core.cs" />
-    <Compile Include="Data\Enums.cs" />
+    <Compile Include="Data\Enums\GameCategories.cs" />
+    <Compile Include="Data\Enums\GameModes.cs" />
+    <Compile Include="Data\Enums\Leagues.cs" />
+    <Compile Include="Data\Enums\MainStates.cs" />
+    <Compile Include="Data\Enums\MatchCrashes.cs" />
+    <Compile Include="Data\Enums\PlayRegion.cs" />
+    <Compile Include="Data\Enums\PlayTypes.cs" />
+    <Compile Include="Data\Enums\Ranks.cs" />
+    <Compile Include="Data\Enums\SubStates.cs" />
     <Compile Include="Utility\ExternalMethods\System.Drawing.Bitmap.cs" />
     <Compile Include="Utility\ExternalMethods\System.Drawing.Icon.cs" />
     <Compile Include="Utility\ExternalMethods\System.IntPtr.cs" />
@@ -143,13 +151,13 @@
     <Compile Include="Windows\CapturableWindow.xaml.cs">
       <DependentUpon>CapturableWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Contents\MatchViewerGrid.xaml.cs">
+    <Compile Include="Windows\Layouts\MatchViewerGrid.xaml.cs">
       <DependentUpon>MatchViewerGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\DebugWindow.xaml.cs">
       <DependentUpon>DebugWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Contents\MatchNavigatorGrid.xaml.cs">
+    <Compile Include="Windows\Layouts\MatchNavigatorGrid.xaml.cs">
       <DependentUpon>MatchNavigatorGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\GameRecord.cs" />
@@ -159,7 +167,7 @@
     <Compile Include="Memory\PPTMemory.cs" />
     <Compile Include="Memory\PPTStatus.cs" />
     <Compile Include="Memory\PPTTimer.cs" />
-    <Compile Include="Windows\Contents\MatchScorePlotGrid.xaml.cs">
+    <Compile Include="Windows\Layouts\MatchScorePlotGrid.xaml.cs">
       <DependentUpon>MatchScorePlotGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\FloatingWindow.xaml.cs">
@@ -171,6 +179,7 @@
     <Compile Include="Windows\Layouts\LongStarPanel.xaml.cs">
       <DependentUpon>LongStarPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Layouts\OutlinedTextBlock.cs" />
     <Compile Include="Windows\Layouts\OverlayWindow.cs" />
     <Compile Include="Windows\Layouts\RowGridSplitter.xaml.cs">
       <DependentUpon>RowGridSplitter.xaml</DependentUpon>
@@ -198,7 +207,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Contents\MatchViewerGrid.xaml">
+    <Page Include="Windows\Layouts\MatchViewerGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -243,11 +252,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\Contents\MatchNavigatorGrid.xaml">
+    <Page Include="Windows\Layouts\MatchNavigatorGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Contents\MatchScorePlotGrid.xaml">
+    <Page Include="Windows\Layouts\MatchScorePlotGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -313,13 +322,19 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Component.LongStarPanel.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Component.LongStarPanel.Lose.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Component.LongStarPanel.Win.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Component.StarPanel.500.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Component.StarPanel.406.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Component.LongStarPanel.Rating.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

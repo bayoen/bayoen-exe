@@ -10,7 +10,7 @@ namespace bayoen.Memory
 {
     public class PPTMemory : ProcessMemory
     {
-        public PPTMemory(string processName) : base(processName, true)
+        public PPTMemory(string processName) : base(processName)
         {
 
         }
@@ -28,13 +28,23 @@ namespace bayoen.Memory
         private IntPtr _leagueAddress;
         public IntPtr LeagueAddress => this._leagueAddress = new IntPtr(this.ReadInt32(new IntPtr(0x140473760), 0x68, 0x20, 0x970) - 0x38);
 
+        public bool Check()
+        {
+            Process[] processes = Process.GetProcessesByName(this.processName);
+            if (processes.Length != 1)
+            {
+                return false;
+            }
+
+            this.Process = processes.Single();
+
+            return true;
+        }
+
+        public Process Process { get; private set; }
+
         public int WinCount => this.ReadInt32(this._scoreAddress + 0x10);
         public int WinCountForced => this.ReadInt32(this.ScoreAddress + 0x10);
-
-        public Process[] GetProcesses()
-        {
-            return Process.GetProcessesByName(this.processName);
-        }
 
         public int PlayerSteamID32(int index) => this.ReadInt32(this._playerAddress + index * 0x50 + 0x40);
         public int PlayerSteamID32Forced(int index) => this.ReadInt32(this.PlayerAddress + index * 0x50 + 0x40);
@@ -103,7 +113,17 @@ namespace bayoen.Memory
         public bool InLocalReplay => this.ReadByte(new IntPtr(0x140598BC8)) != 0;
         public bool InMatch => this.ReadInt32(new IntPtr(0x140461B20)) != 0;
 
-        public bool PuzzleLeagueGameFinishFlag => this.ReadInt32(new IntPtr(0x140460690), 0xB4) == 1;
+        //public bool PuzzleLeagueGameFinishFlag => this.ReadInt32(new IntPtr(0x140460690), 0xB4) == 1;
+        public bool PuzzleLeagueGameFinishFlag => this.ReadInt32(new IntPtr(0x140461B20), 0x454) == 7;
+
+        public bool IsGameFinished
+        {
+            get
+            {
+                int pointer = this.ReadByte(new IntPtr(0x140461B20), 0x42C);
+                return pointer == 0 || pointer == 1;
+            }
+        }
 
         public bool InReady
         {

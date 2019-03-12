@@ -13,6 +13,8 @@
                  ShowIconOnTitleBar="False"
                  BorderThickness="1">
     <Grid  VerticalAlignment="Center" HorizontalAlignment="Center">
-        <TextBlock x:Name="TextOut"/>
+        <ScrollViewer>
+            <TextBlock x:Name="TextOut"/>
+        </ScrollViewer>
     </Grid>
 </mtc:MetroWindow>

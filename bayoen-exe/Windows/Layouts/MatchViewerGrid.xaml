@@ -1,10 +1,9 @@
-﻿<Grid x:Class="bayoen.Windows.Contents.MatchViewerGrid"
+﻿<Grid x:Class="bayoen.Windows.Layouts.MatchViewerGrid"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:mtc="http://metro.mahapps.com/winfx/xaml/controls"
-      xmlns:layout="clr-namespace:bayoen.Windows.Layouts"
-      xmlns:content="clr-namespace:bayoen.Windows.Contents">
+      xmlns:layout="clr-namespace:bayoen.Windows.Layouts">
 
     <Grid.Background>
         <SolidColorBrush Color="#222" Opacity="0.8"/>

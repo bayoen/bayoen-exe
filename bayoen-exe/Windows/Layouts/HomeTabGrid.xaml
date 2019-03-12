@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mtc="http://metro.mahapps.com/winfx/xaml/controls"
       xmlns:layout="clr-namespace:bayoen.Windows.Layouts"
-      xmlns:content="clr-namespace:bayoen.Windows.Contents"
       Margin="10,0,0,0">
 
     <Grid.Resources>
@@ -41,7 +40,7 @@
     <GroupBox x:Name="RecentGroupBox" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
               MaxWidth="600"
               Header="Recent">
-        <content:MatchViewerGrid x:Name="RecentNavigator" IsRecentOnly="True"/>
+        <layout:MatchViewerGrid x:Name="RecentNavigator" IsRecentOnly="True"/>
     </GroupBox>
 
 </Grid>

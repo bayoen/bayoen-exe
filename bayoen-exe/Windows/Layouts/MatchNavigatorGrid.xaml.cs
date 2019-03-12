@@ -18,7 +18,7 @@ using System.Windows.Shapes;
 
 using bayoen.Data;
 
-namespace bayoen.Windows.Contents
+namespace bayoen.Windows.Layouts
 {
     /// <summary>
     /// MatchNavigator.xaml에 대한 상호 작용 논리
