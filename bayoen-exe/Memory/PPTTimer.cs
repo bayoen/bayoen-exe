@@ -79,6 +79,7 @@ namespace bayoen.Memory
         {
             Core.DebugWindow.TextOut.Text += ((lineBreak) ? (Environment.NewLine) : ("")) + s;
         }
+#endif
 
         private void AddTextOut()
         {

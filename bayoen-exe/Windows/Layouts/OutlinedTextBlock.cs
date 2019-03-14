@@ -55,7 +55,7 @@ namespace bayoen.Windows.Layouts
             FontWeight fontWeight = FontWeights.Medium;
 
             if (Bold == true) fontWeight = FontWeights.Bold;
-            if (ExtraBold = true) fontWeight = FontWeights.ExtraBold;
+            if (ExtraBold == true) fontWeight = FontWeights.ExtraBold;
             if (Italic == true) fontStyle = FontStyles.Italic;
 
             // Create the formatted text based on the properties set.

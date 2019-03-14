@@ -1,12 +1,16 @@
-﻿using System.Windows.Controls;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace bayoen.Utility.ExternalMethods
 {
     public static partial class ExtendedMethods
     {
-        public static bool SetBitmap(this Image image, System.Drawing.Bitmap bitmap)
+        public static bool SetBitmap(this System.Windows.Controls.Image image, System.Drawing.Bitmap bitmap)
+        {
+            return image.SetBitmap(bitmap, BitmapScalingMode.Fant);
+        }
+
+        public static bool SetBitmap(this System.Windows.Controls.Image image, System.Drawing.Bitmap bitmap, BitmapScalingMode mode)
         {
             try
             {
@@ -18,12 +22,12 @@ namespace bayoen.Utility.ExternalMethods
                     BitmapImage bitmapImageToken = new BitmapImage();
                     bitmapImageToken.BeginInit();
                     bitmapImageToken.CacheOption = BitmapCacheOption.OnLoad;
-                    
+
                     bitmapImageToken.StreamSource = streamToken;
                     bitmapImageToken.EndInit();
 
                     image.Source = bitmapImageToken;
-                    RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.Fant);
+                    RenderOptions.SetBitmapScalingMode(image, mode);
                     bitmapImageToken.Freeze();
                 }
             }
