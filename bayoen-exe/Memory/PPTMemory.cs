@@ -79,7 +79,7 @@ namespace bayoen.Memory
         public int LobbySize => this.ReadInt32(new IntPtr(0x140473760), 0x20, 0xB4);
         public int LobbyMax => this.ReadInt32(new IntPtr(0x140473760), 0x20, 0xB8);
 
-        public string MyName => this.ReadValidString(new IntPtr(0x1405A2010), Config.PlayerNameSize);
+        public string MyName => this.ReadValidString(new IntPtr(0x14059B418), Config.PlayerNameSize);
         public int MyID32 => this.ReadInt32(new IntPtr(0x1405A2010));
         public int MyRating => this.ReadInt16(new IntPtr(0x140599FF0));
         public int MyIndex

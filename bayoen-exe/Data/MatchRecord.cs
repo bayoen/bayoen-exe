@@ -58,7 +58,15 @@ namespace bayoen.Data
 
         [js::JsonProperty(PropertyName = "DataFormatVersion")]
         public static Version DataFormatVersion = new Version(0, 1);
-        
+
+        public bool Reset()
+        {
+            this.MatchBegin = DateTime.MinValue;
+            this.MatchEnd = DateTime.MinValue;
+
+            return true;
+        }
+
         public bool Initialize()
         {
             // Already Checked!           

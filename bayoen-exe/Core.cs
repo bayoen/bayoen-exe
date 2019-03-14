@@ -21,10 +21,10 @@ namespace bayoen
         private static MainWindow _mainWindow;
         public static MainWindow MainWindow => _mainWindow ?? (_mainWindow = new MainWindow());
 
-        #if DEBUG
+#if DEBUG
         private static DebugWindow _debugWindow;
         public static DebugWindow DebugWindow => _debugWindow ?? (_debugWindow = new DebugWindow());
-        #endif
+#endif
 
         private static PPTMemory _pptMemory;
         public static PPTMemory PPTMemory => _pptMemory ?? (_pptMemory = new PPTMemory(Config.PPTName));
@@ -49,18 +49,18 @@ namespace bayoen
 
         public static void Initialize()
         {
-            TrayIcon.IconText = Config.ProjectName;
+            Core.TrayIcon.IconText = Config.ProjectName;
 
-            MainWindow.Show();
-            #if DEBUG
-            DebugWindow.Show();
-            #endif
+            Core.MainWindow.Show();
+#if DEBUG
+            Core.DebugWindow.Show();
+#endif
 
-            OldPPTStatus = new PPTStatus();
-            OldPPTStatus.Check();
+            Core.OldPPTStatus = new PPTStatus();
+            Core.OldPPTStatus.Check();
 
-            PPTTimer.Start();
-
+            Core.CurrentMatch.Reset();
+            Core.PPTTimer.Start();
         }
     }
 }

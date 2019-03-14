@@ -12,9 +12,9 @@
                  WindowTitleBrush="Transparent"
                  ShowIconOnTitleBar="False"
                  BorderThickness="1">
-    <Grid  VerticalAlignment="Center" HorizontalAlignment="Center">
+    <Grid>
         <ScrollViewer>
-            <TextBlock x:Name="TextOut"/>
+            <TextBlock x:Name="TextOut" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </ScrollViewer>
     </Grid>
 </mtc:MetroWindow>
