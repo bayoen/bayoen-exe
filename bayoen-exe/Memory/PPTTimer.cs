@@ -45,11 +45,12 @@ namespace bayoen.Memory
             
             Core.OldPPTStatus = Core.PPTStatus.Clone() as PPTStatus;
 
-            #if DEBUG
+#if DEBUG
             DebugTick();
-            #endif
+#endif
         }
 
+#if DEBUG
         private void DebugTick()
         {
             //Core.DebugWindow.TextOut.Text = Core.CurrentMatch.ToJSON().ToString();
@@ -60,6 +61,7 @@ namespace bayoen.Memory
                                             + $"\nMyRating: {Core.PPTMemory.MyRating}"
                                             + $"\nGameFinished: {Core.PPTMemory.IsGameFinished}";
         }
+#endif
 
         private void PuzzleLeagueTick()
         {
