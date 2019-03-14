@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace bayoen.Memory
 {
+    /// <summary>
+    /// base 'ProcessMemory' (https://github.com/mat1jaczyyy/ProcessMemory)
+    /// </summary>
     public class PPTMemory : ProcessMemory
     {
         public PPTMemory(string processName) : base(processName)
