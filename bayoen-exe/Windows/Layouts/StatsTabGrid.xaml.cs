@@ -20,6 +20,22 @@ namespace bayoen.Windows.Layouts
         public StatsTabGrid()
         {
             InitializeComponent();
+
+            this.MatchViewer.DataGrid.SelectionChanged += DataGrid_SelectionChanged;
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int selectedIndex = (sender as DataGrid).SelectedIndex;
+
+            if (selectedIndex > -1)
+            {
+                this.MatchScorePlot.Set(this.MatchViewer.Matches[selectedIndex]);
+            }
+            else
+            {
+                this.MatchScorePlot.Clear();
+            }
         }
     }
 }

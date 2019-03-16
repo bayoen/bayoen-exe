@@ -23,6 +23,23 @@ namespace bayoen.Windows
 {
     public partial class MainWindow : mtc::MetroWindow
     {
+        private int _selectedTabIndex;
+        public int SelectedTabIndex
+        {
+            get => this._selectedTabIndex;
+            set
+            {
+                if (this._selectedTabIndex == value) return;
+
+                for (int tabIndex = 0; tabIndex < this.ContentGrid.Children.Count; tabIndex++)
+                {
+                    this.ContentGrid.Children[tabIndex].Visibility = (tabIndex == value) ? Visibility.Visible : Visibility.Collapsed;
+                }
+
+                this._selectedTabIndex = value;
+            }
+        }
+
         public MainWindow()
         {
             this.InitializeComponent();
@@ -35,10 +52,13 @@ namespace bayoen.Windows
                 Stretch = Stretch.UniformToFill,
             };
 
-            this.SetVersion($"{Config.ProjectName} v{Config.ProjectVersion.ToString()}");
+            this.SetVersion($"{Config.ProjectAssemply.Name} v{Config.ProjectAssemply.Version.ToString()}");
             this.Status("Ready");
+            this._selectedTabIndex = -1;
+            this.SelectedTabIndex = 0;
 
-            this.HomeTabGrid.RecentNavigator.CheckGrid();            
+            this.HomeTabGrid.RecentMatchViewer.CheckGrid();
+            this.StatsTabGrid.MatchViewer.CheckGrid();
         }
 
         public void Status(string s)

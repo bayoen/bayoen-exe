@@ -40,8 +40,8 @@ namespace bayoen.Windows.Layouts
             set
             {
                 this.PagePanel.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
+                if (value) this.MatchIndex = -1;
                 this._isRecentOnly = value;
-                this.MatchIndex = -1;
             }
         }
 

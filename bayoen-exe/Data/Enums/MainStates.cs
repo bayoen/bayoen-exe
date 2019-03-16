@@ -6,6 +6,7 @@
         None,
         Offline,
         Title,
+        Demo,
 
         MainMenu,
         Adventure,

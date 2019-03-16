@@ -10,7 +10,7 @@
             <Setter Property="FontSize" Value="26"/>
             <Setter Property="FontWeight" Value="ExtraBold"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="0,0,12,0"/>
+            <Setter Property="Margin" Value="4,4,12,0"/>
         </Style>
         <Style TargetType="{x:Type Image}">
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -37,7 +37,7 @@
            Height="68" Width="500"/>
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
         <TextBlock x:Name="PanelHeaderTextBlock"               
-               Margin="4,8,4,8"
+               Margin="4,0,4,0"
                Text="Today's League:"/>
         <!--<Image x:Name="WinImage"/>-->
         <layout:OutlineTextControl Text="W" Stroke="#DE2421" Margin="10,0,40,30"/>

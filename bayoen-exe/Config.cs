@@ -6,21 +6,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 using js = Newtonsoft.Json;
+using bayoen.Utility.Json;
+using System.Reflection;
 
 namespace bayoen
 {
     public class Config
     {
-        public static readonly string ProjectName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
-
-        public static readonly Version ProjectVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-
         public static readonly string PPTName = "puyopuyotetris";
-
-        public static readonly string StatFolderName = "stats";
-
+        public static readonly AssemblyName ProjectAssemply = Assembly.GetExecutingAssembly().GetName();
         public static readonly TimeSpan PPTTimeSpan = new TimeSpan(0, 0, 0, 0, 5);
 
+        public static readonly string StatFolderName = "stats";
         public static readonly uint PlayerNameSize = 36;
 
         public static readonly Encoding TextEncoding = Encoding.Unicode;
@@ -40,6 +37,10 @@ namespace bayoen
                     Culture = CultureInfo.CurrentCulture,
                     DateTimeStyles = DateTimeStyles.AssumeLocal,
                 },
+                new VersionConverter()
+                {
+                    
+                },
             }
         };
 
@@ -48,5 +49,7 @@ namespace bayoen
         public static readonly int MatchMax = 10;
 
         public static readonly double SplitterThickness = 4;
+
+        public static readonly string[] ScorePlotColorHexes = { "#0099FF", "#FF6666", "#33CC33", "#FFCC33" };
     }
 }

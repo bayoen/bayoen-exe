@@ -138,10 +138,12 @@
     <Compile Include="Data\Enums\PlayTypes.cs" />
     <Compile Include="Data\Enums\Ranks.cs" />
     <Compile Include="Data\Enums\SubStates.cs" />
+    <Compile Include="Utility\ExternalMethods\System.DateTime.cs" />
     <Compile Include="Utility\ExternalMethods\System.Drawing.Bitmap.cs" />
     <Compile Include="Utility\ExternalMethods\System.Drawing.Icon.cs" />
     <Compile Include="Utility\ExternalMethods\System.IntPtr.cs" />
     <Compile Include="Utility\ExternalMethods\System.Windows.Controls.Image.cs" />
+    <Compile Include="Utility\Json\VersionConverter.cs" />
     <Compile Include="Utility\Win32\Gdi32.dll.cs" />
     <Compile Include="Utility\Win32\GWL.cs" />
     <Compile Include="Utility\Win32\RECT.cs" />
@@ -183,6 +185,9 @@
     <Compile Include="Windows\Layouts\OverlayWindow.cs" />
     <Compile Include="Windows\Layouts\RowGridSplitter.xaml.cs">
       <DependentUpon>RowGridSplitter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Layouts\StarTabGrid.xaml.cs">
+      <DependentUpon>StarTabGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Layouts\TabNavigatorListViewItem.xaml.cs">
       <DependentUpon>TabNavigatorListViewItem.xaml</DependentUpon>
@@ -228,6 +233,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Layouts\RowGridSplitter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Layouts\StarTabGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

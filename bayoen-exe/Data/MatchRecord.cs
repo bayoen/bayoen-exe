@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using bayoen.Data.Enums;
 using bayoen.Memory;
+using bayoen.Utility.ExternalMethods;
+
 using js = Newtonsoft.Json;
 using jl = Newtonsoft.Json.Linq;
-using System.Globalization;
-using bayoen.Data.Enums;
 
 namespace bayoen.Data
 {
@@ -56,8 +58,8 @@ namespace bayoen.Data
         [js::JsonProperty(PropertyName = "Games")]
         public List<GameRecord> Games { get; private set; }
 
-        [js::JsonProperty(PropertyName = "DataFormatVersion")]
-        public static Version DataFormatVersion = new Version(0, 1);
+        [js::JsonProperty(PropertyName = "DataVersion")]
+        public static Version DataVersion = new Version(0, 1, 1);
 
         public bool Reset()
         {
@@ -153,14 +155,15 @@ namespace bayoen.Data
         {
             get
             {
-                if (this.MatchEnd.ToLocalTime().Date == DateTime.Today)
-                {
-                    return this.MatchEnd.ToLocalTime().ToString("tt hh:mm:ss", CultureInfo.CreateSpecificCulture("en-US"));
-                }
-                else
-                {
-                    return this.MatchEnd.ToLocalTime().ToString("d MMM yy", CultureInfo.CreateSpecificCulture("en-US"));
-                }                               
+                //if (this.MatchEnd.ToLocalTime().Date == DateTime.Today)
+                //{
+                //    return this.MatchEnd.ToLocalTime().ToString("tt hh:mm:ss", CultureInfo.CreateSpecificCulture("en-US"));
+                //}
+                //else
+                //{
+                //    return this.MatchEnd.ToLocalTime().ToString("d MMM yy", CultureInfo.CreateSpecificCulture("en-US"));
+                //}
+                return this.MatchEnd.ToLocalTime().ToSimpleString();
             }
         }
 

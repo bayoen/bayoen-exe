@@ -33,7 +33,7 @@ namespace bayoen.Windows
 
         private void NavigatorListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            this.SelectedTabIndex = (sender as ListView).SelectedIndex;
         }
     }
 }

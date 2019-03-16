@@ -40,7 +40,7 @@
     <GroupBox x:Name="RecentGroupBox" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
               MaxWidth="600"
               Header="Recent">
-        <layout:MatchViewerGrid x:Name="RecentNavigator" IsRecentOnly="True"/>
+        <layout:MatchViewerGrid x:Name="RecentMatchViewer" IsRecentOnly="True"/>
     </GroupBox>
 
 </Grid>

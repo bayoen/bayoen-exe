@@ -29,13 +29,19 @@ namespace bayoen.Memory
                 {
                     case MainStates.PuzzleLeague:
                         this.PuzzleLeagueTick();
+                        Core.MainWindow.Status("Puzzle League");
                         break;
                     case MainStates.FreePlay:
                         this.FreePlayTick();
+                        Core.MainWindow.Status("Free Play");
                         break;
                     case MainStates.SoloArcade:
+                        this.ArcadeTick();
+                        Core.MainWindow.Status("Solo Arcade");
+                        break;
                     case MainStates.MultiArcade:
                         this.ArcadeTick();
+                        Core.MainWindow.Status("Multi Arcade");
                         break;
                     default:
                         Core.MainWindow.Status("Ready");
@@ -47,6 +53,8 @@ namespace bayoen.Memory
             }
             else
             {
+                this.OfflineTick();
+
                 Core.FloatingWindow.IsClosed = true;
                 Core.MainWindow.Status("Offline");
             }
@@ -64,28 +72,39 @@ namespace bayoen.Memory
         {
             //Core.DebugWindow.TextOut.Text = Core.CurrentMatch.ToJSON().ToString();
 
+            var memory = Core.PPTMemory;
+            var status = Core.PPTStatus;
+
             Core.DebugWindow.TextOut.Text = "";
-            AddTextOut($"MyName: {Core.PPTMemory.MyName} (Rating: {Core.PPTMemory.MyRating})", false);
+            AddTextOut($"MyName: {memory.MyName} (Rating: {memory.MyRating})", false);
             AddTextOut();
-            AddTextOut($"MainState: {Core.PPTStatus.MainState.ToString()}");
-            AddTextOut($"SubState: {(Core.PPTStatus.SubState == SubStates.Empty ? "" : Core.PPTStatus.SubState.ToString())}");
-            AddTextOut($"GameMode: {(Core.PPTStatus.GameMode == GameModes.None ? "" : Core.PPTStatus.GameMode.ToString())}{(Core.PPTStatus.IsEndurance ? " (Endurance)" : "")}");
-            AddTextOut($"GameFinished: {Core.PPTMemory.IsGameFinished}");
+            AddTextOut($"MainState: {status.MainState.ToString()}");
+            AddTextOut($"SubState: {(status.SubState == SubStates.Empty ? "" : status.SubState.ToString())}");
+            AddTextOut($"GameMode: {(status.GameMode == GameModes.None ? "" : status.GameMode.ToString())}{(status.IsEndurance ? " (Endurance)" : "")}");
+            AddTextOut($"GameFinished: {memory.IsGameFinished}");
             AddTextOut();
-            AddTextOut();
+            AddTextOut($"Online Players: {memory.PlayerName(0)}, {memory.PlayerName(1)}, {memory.PlayerName(2)}, {memory.PlayerName(3)}");
+            AddTextOut($"Local Players: {memory.PlayerNameLocal(0)}, {memory.PlayerNameLocal(1)}, {memory.PlayerNameLocal(2)}, {memory.PlayerNameLocal(3)}");
         }
 
         private void AddTextOut(string s, bool lineBreak = true)
         {
             Core.DebugWindow.TextOut.Text += ((lineBreak) ? (Environment.NewLine) : ("")) + s;
         }
-#endif
 
         private void AddTextOut()
         {
             Core.DebugWindow.TextOut.Text += Environment.NewLine;
         }
 #endif
+
+        private void OfflineTick()
+        {
+            //if (Core.PPTStatus.MainState == MainStates.Offline)
+            //{
+            //    if (!Core.PPTStatus.IsFromOffline) Core.PPTStatus.IsFromOffline = true;
+            //}
+        }
 
         private void PuzzleLeagueTick()
         {
@@ -179,7 +198,9 @@ namespace bayoen.Memory
                         Core.CurrentMatch.Reset();
 
                         Core.FloatingWindow.PuzzleLeagueResultPanel.CheckScore();
-                        Core.MainWindow.HomeTabGrid.RecentNavigator.CheckGrid();
+
+                        Core.MainWindow.HomeTabGrid.RecentMatchViewer.CheckGrid();
+                        Core.MainWindow.StatsTabGrid.MatchViewer.CheckGrid();
                     }
                 }
             }
@@ -208,19 +229,21 @@ namespace bayoen.Memory
                     Core.CurrentMatch.Reset();
 
                     Core.FloatingWindow.PuzzleLeagueResultPanel.CheckScore();
-                    Core.MainWindow.HomeTabGrid.RecentNavigator.CheckGrid();
+
+                    Core.MainWindow.HomeTabGrid.RecentMatchViewer.CheckGrid();
+                    Core.MainWindow.StatsTabGrid.MatchViewer.CheckGrid();
                 }
-            }
+            }            
         }
 
         private void FreePlayTick()
         {
-
+            
         }
 
         private void ArcadeTick()
         {
-
+            
         }
     }
 }

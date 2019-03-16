@@ -89,7 +89,7 @@ namespace bayoen.Memory
                 this.SubState = SubStates.InReady;
                 return true;
             }
-            
+
             if (Core.PPTMemory.InMatch)
             {
                 this.SubState = SubStates.InMatch;
@@ -98,8 +98,14 @@ namespace bayoen.Memory
                 this.IsGameFinished = Core.PPTMemory.IsGameFinished;
                 this.PlayerStars = Core.PPTMemory.PlayerStars;
                 this.MyRating = Core.PPTMemory.MyRating;
+            }
 
-                return true;
+            if (this.MainState == MainStates.SoloArcade || this.MainState == MainStates.MultiArcade)
+            {
+                if (Core.PPTMemory.PlayerNameLocal(0) + Core.PPTMemory.PlayerNameLocal(1) == "")
+                {
+                    this.MainState = MainStates.Demo;
+                }
             }
 
             return true;

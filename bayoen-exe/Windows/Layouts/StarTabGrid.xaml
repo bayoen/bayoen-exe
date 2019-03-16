@@ -1,0 +1,8 @@
+﻿<Grid x:Class="bayoen.Windows.Layouts.StarTabGrid"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mtc="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:layout="clr-namespace:bayoen.Windows.Layouts"
+      Margin="10,0,0,0">
+
+</Grid>

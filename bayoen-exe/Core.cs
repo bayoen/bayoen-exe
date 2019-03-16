@@ -49,7 +49,7 @@ namespace bayoen
 
         public static void Initialize()
         {
-            Core.TrayIcon.IconText = Config.ProjectName;
+            Core.TrayIcon.IconText = Config.ProjectAssemply.Name;
 
             Core.MainWindow.Show();
 #if DEBUG

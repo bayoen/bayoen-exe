@@ -54,7 +54,7 @@ namespace bayoen.Memory
 
         public string PlayerName(int index) => this.ReadValidString(this._playerAddress + index * 0x50, Config.PlayerNameSize);
         public string PlayerNameForced(int index) => this.ReadValidString(this.PlayerAddress + index * 0x50, Config.PlayerNameSize);
-        public string PlayerNameDirect(int index) => this.ReadValidString(new IntPtr(0x140598BD4 + index * 0x68), Config.PlayerNameSize);
+        public string PlayerNameLocal(int index) => this.ReadValidString(new IntPtr(0x140598BD4 + index * 0x68), Config.PlayerNameSize);
 
         public string PlayerNameRaw(int index) => this.ReadStringUnicode(this._playerAddress + index * 0x50, Config.PlayerNameSize);       
 
